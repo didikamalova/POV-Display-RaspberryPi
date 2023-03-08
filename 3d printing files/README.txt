@@ -1,1 +1,0 @@
-Persistence Of Vision Globe (PoV) with Raspberry Pi3 + Pico (RP2040) by rottaca on Thingiverse: https://www.thingiverse.com/thing:4871230
