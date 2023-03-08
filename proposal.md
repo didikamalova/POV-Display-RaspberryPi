@@ -1,5 +1,5 @@
 ## Title of your project
-Persistence of Vision (POV) Globe
+Persistence of Vision (POV) Display
 
 ## Team members:
 Naomi Mo
@@ -7,35 +7,52 @@ Didi Kamalova
 Aanya Tashfeen
 
 ## Project description
-Short description of the basic idea and end goal you are aiming for. 
-Include stretch goals and/or fallback position to indicate how you 
-might fine-tune the project scope if needed.
+We want to create a spherical persistence of vision (POV) LED Display. 
 
-Our group is aiming to create a spherical persistence of vision (POV)
-device. The ideal goal is to have a fully functional, spinning ring of 
-LEDs that generates the illusion of a sphere when it spins fast enough.
-We hope to encode the image of a globe on the LEDs, though this is a 
-stretch goal due to its complexity. Some fallback goals are to generate
-fun patterns/a disco ball image on the device. If the 3D devices gives
-us trouble, we may also fall back on generating a 2D image interface. 
+Our goal is to create a fully functinoning LED Display that works by spinning a 
+circular array of LEDs and relies on our eyes' natural “refresh rates” to create the 
+illusion of a solid image on a sphere.
+
+We want to be able to display fun patterns (disco ball, for example) on it. If that works, 
+we want to try encoding an image of the globe on our display and/or adding peripherals to it.
 
 ## Hardware, budget
 Itemize what hardware, if any, you need and your plan for acquiring it.
 Rough budget for the project. We will reimburse up to $20 per person.
 
 Required hardware:
-- hall effect sensors (given to us by Pat!)
-- magnets, preferably neodymium (hopefully Pat has some available, if not
-we can order some for around ~$20)
-- LED strip (from Lab 64)
-- battery pack (from Lab 64)
-- 3D-printed ring/mount (hopefully printed for free at Lab 64)
-- DC motor
+- x1 A3134 Hall Effect Sensor - Pat
+- x8 Neodymium Magnets - Pat
+- x2 AdaFruit DotStar LED strip 144 LED/m 0.5m - lab64
+- x1 3AA Battery Pack - lab64
+- x10 M4, M5 bolts & nuts - lab64/room 36
+- x5 3D Printed Parts - lab64
+- x1 ~200x200x20mm Steel/Wood Base Plate - lab64/room 36 wood scraps
+- x1 (^) 12V 2000-3000RPM DC Motor (4mm) - Stanford Robotics Lab
+- x1 (^) 8mm aluminum/steel rod - Room 36
+- x1 (^) DC Motor Adapter (4/5mm to 8mm) - Stanford Robotics Lab
+- x1 (^) Ball Bearing - Stanford Robotics Lab
+- x1 (^) Rotary Slip Ring - Stanford Robotics Lab
+- x1 Power Supply (for testing purposes) - lab64
+
+(^) - items we're still searching for and may need to purchase elsewhere.
+Rough Budget: $50-60 for components we won't be able to find.
 
 ## Tasks, member responsibilities
 Each team member should be responsible for a clearly identifiable part of the project.
 
-(TBD)
+Our project will be divided into the following categories:
+Software: graphics module (gl_draw() functions), hall sensor driver, led driver.
+Electrical: circuit schematics, power management, soldering.
+Mechanical: ring, frame, motor, cable management, assembly.
+
+Division of tasks (not final):
+
+Aanya:
+
+Didi: led setup, circuits, hardware sourcing
+
+Naomi: hall sensors setup, 
 
 ## Schedule, midpoint milestones
 What are the one-week goals you plan to meet for next week?
@@ -49,4 +66,9 @@ Are there books/code/tools/materials that you need access to?
 What are the possible risks to overcome? What are you concerned about? 
 How can we help you succeed?
 
+Our possible concerns include mechanical/electrical assembly problems that we may run into, such as rotating
+wires getting tangled up, poor electrical power trasmission, lack of frame stability, extra motor vibrations 
+and lack of battery capacity.
+
+In the event we encounter issues with the 3D display, we plan on working on a 2D LED display instead.
 
