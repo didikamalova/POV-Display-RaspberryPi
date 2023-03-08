@@ -1,12 +1,12 @@
-## Title of your project
+## Title:
 Persistence of Vision (POV) Display
 
-## Team members:
+## Team Members:
 Naomi Mo
 Didi Kamalova
 Aanya Tashfeen
 
-## Project description
+## Project Description:
 We want to create a spherical persistence of vision (POV) LED Display. 
 
 Our goal is to create a fully functinoning LED Display that works by spinning a circular array of LEDs and relies on our eyes' natural “refresh
@@ -14,10 +14,7 @@ rates” to create the illusion of a solid image on a sphere.
 
 We want to be able to display fun patterns (disco ball, for example) on it. If that works, we want to try encoding an image of the globe on our display and/or adding peripherals to it.
 
-## Hardware, budget
-Itemize what hardware, if any, you need and your plan for acquiring it.
-Rough budget for the project. We will reimburse up to $20 per person.
-
+## Hardware & Budget:
 Required hardware:
 - x1 A3134 Hall Effect Sensor - Pat
 - x8 Neodymium Magnets - Pat
@@ -36,11 +33,10 @@ Required hardware:
 (^) - items we're still searching for and may need to purchase elsewhere.
 Rough Budget: $50-60 for components we won't be able to find.
 
-## Tasks, member responsibilities
+## Tasks & Member Responsibilities:
 Each team member should be responsible for a clearly identifiable part of the project.
 
 Our project will be divided into the following categories:
-
 Software: graphics module (gl_draw() functions), hall sensor driver, led driver.
 Electrical: circuit schematics, power management, soldering.
 Mechanical: ring, frame, motor, cable management, assembly.
@@ -53,13 +49,11 @@ Didi: led setup, circuits, hardware sourcing
 
 Naomi: hall sensors setup, 
 
-## Schedule, midpoint milestones
-What are the one-week goals you plan to meet for next week?
-
+## Schedule & Midpoint Milestones:
 By the end of the upcoming weekend, we want our entire mechanical assembly in place. By the end of the following weekend, we want a working sphere 
 with a functional LED display. 
 
-## Resources needed, issues
+## Resources Needed & Issues:
 Are there books/code/tools/materials that you need access to? 
 What are the possible risks to overcome? What are you concerned about? 
 How can we help you succeed?
