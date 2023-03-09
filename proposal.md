@@ -23,9 +23,9 @@ Required hardware:
 - x10 M4, M5 bolts & nuts - lab64/room 36
 - x5 3D Printed Parts - lab64
 - x1 ~200x200x20mm Steel/Wood Base Plate - lab64/room 36 wood scraps
-- x1 (^) 12V 2000-3000RPM DC Motor (4mm) - Stanford Robotics Lab
-- x1 (^) 8mm aluminum/steel rod - Room 36
-- x1 (^) DC Motor Adapter (4/5mm to 8mm) - Stanford Robotics Lab
+- x1 2000-3000RPM DC Motor (4mm) - Stanford Robotics Lab/Aanya's Fan
+- x1 6.3mm aluminum/steel rod - Room 36
+- x1 (^) DC Motor Adapter (5mm to 6mm) - Stanford Robotics Lab
 - x1 (^) Ball Bearing - Stanford Robotics Lab
 - x1 (^) Rotary Slip Ring - Stanford Robotics Lab
 - x1 Power Supply (for testing purposes) - lab64
