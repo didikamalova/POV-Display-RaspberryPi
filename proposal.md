@@ -26,7 +26,7 @@ Required hardware:
 - x1 2000-3000RPM DC Motor (4mm) - Stanford Robotics Lab/Aanya's Fan
 - x1 6.3mm aluminum/steel rod - Room 36
 - x1 (^) DC Motor Adapter (5mm to 6mm) - Stanford Robotics Lab
-- x1 (^) Ball Bearing - Stanford Robotics Lab
+- x1 (^) Ball Bearing - Stanford Robotics Lab/Room 36
 - x1 (^) Rotary Slip Ring - Stanford Robotics Lab
 - x1 Power Supply (for testing purposes) - lab64
 
@@ -43,7 +43,7 @@ Mechanical: ring, frame, motor, cable management, assembly.
 
 Division of tasks (not final):
 
-Aanya:
+Aanya: mechanical assembly, math for graphics
 
 Didi: led setup, circuits, hardware sourcing
 
@@ -62,3 +62,6 @@ Our possible concerns include mechanical/electrical assembly problems that we ma
 
 In the event we encounter issues with the 3D display, we plan on working on a 2D LED display instead.
 
+Resources: POV globe video and github repo: https://www.youtube.com/watch?v=E4yqSw38R_Q&t=178s
+		   Julie's LED strip driver code and Pat's hall effect sensor code
+		   Math libraries from cs 107e repo
