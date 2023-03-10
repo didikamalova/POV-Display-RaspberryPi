@@ -23,6 +23,4 @@ the process you followed? what you learned along the way? Tell us about it!
 ## Photos
 You are encouraged to submit photos/videos of your project in action. 
 Add the files and commit to your project repository to include along with your submission.
-aanya tashfeen
-naomi mo testing :)
-hiu naomi
+
