@@ -24,6 +24,7 @@
 #include "gpio_extra.h"
 #include "uart.h"
 #include "printf.h"
+#include "interrupts.h"
 
 void print_magnet(unsigned int vout)
 {
@@ -32,7 +33,6 @@ void print_magnet(unsigned int vout)
 
 void main(void) {
 	const unsigned vout= GPIO_PIN2;
-
     gpio_init();
     uart_init();
 
