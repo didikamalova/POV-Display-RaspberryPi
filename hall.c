@@ -24,7 +24,8 @@
 #include "gpio_extra.h"
 #include "uart.h"
 #include "printf.h"
-#include "interrupts.h"
+//#include "interrupts.h"
+#include "timer.h"
 
 void print_magnet(unsigned int vout)
 {
@@ -32,19 +33,27 @@ void print_magnet(unsigned int vout)
 }
 
 void main(void) {
-	const unsigned vout= GPIO_PIN2;
+	const unsigned hall_pin= GPIO_PIN2;
+	const unsigned LED_pin = GPIO_PIN3;
+
+//	interrupts_init();
     gpio_init();
+//	interrupts_global_enable();
+
     uart_init();
 
-  	gpio_set_function(vout, GPIO_FUNC_INPUT);
-  	gpio_set_pullup(vout);
+  	gpio_set_function(hall_pin, GPIO_FUNC_INPUT);
+  	gpio_set_pullup(hall_pin);
 
     // vout is 1 when the magnet is out of range of the sensor
     print_magnet(1);
 	while(1) {
-  		while(gpio_read(vout) == 1) {} // wait for low
-		print_magnet(0);
-  		while(gpio_read(vout) == 0) {} // wait for high
-		print_magnet(1);
+ // 		while(gpio_read(vout) == 1) {} // wait for low
+//		print_magnet(0);
+  //		while(gpio_read(vout) == 0) {} // wait for high
+	//	print_magnet(1);
+		if (gpio_read(hall_pin) == 0) {
+			
+		}
 	}
 }

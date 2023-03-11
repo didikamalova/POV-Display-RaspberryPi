@@ -100,5 +100,5 @@ void main(void)
     gpio_set_output(NEO_DATA_GPIO);
 
     rainbow();
-    // cycle(GL_PURPLE, 8);
+//    cycle(GL_PURPLE, 8);
 }
