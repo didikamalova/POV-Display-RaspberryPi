@@ -25,11 +25,17 @@ Required hardware:
 - x1 ~200x200x20mm Steel/Wood Base Plate - lab64/room 36 wood scraps
 - x1 2000-3000RPM DC Motor (4mm) - Stanford Robotics Lab/Aanya's Fan
 - x1 6.3mm aluminum/steel rod - Room 36
+<<<<<<< Updated upstream
 - x1 (^) DC Motor Adapter (5mm to 6mm) - Stanford Robotics Lab
 - x1 Ball Bearing - Stanford Robotics Lab/Room 36
+=======
+- x1 (^) DC Motor Adapter - Stanford Robotics Lab
+- x1 Ball Bearing - Room 36
+>>>>>>> Stashed changes
 - x1 Power Supply (for testing purposes) - lab64
 
 (^) - items we're still searching for and may need to purchase elsewhere.
+
 Rough Budget: $50-60 for components we won't be able to find.
 
 ## Tasks & Member Responsibilities:
