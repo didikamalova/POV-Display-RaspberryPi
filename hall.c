@@ -48,10 +48,10 @@ void main(void) {
     // vout is 1 when the magnet is out of range of the sensor
     print_magnet(1);
 	while(1) {
- // 		while(gpio_read(vout) == 1) {} // wait for low
-//		print_magnet(0);
-  //		while(gpio_read(vout) == 0) {} // wait for high
-	//	print_magnet(1);
+  		while(gpio_read(vout) == 1) {} // wait for low
+	print_magnet(0);
+  		while(gpio_read(vout) == 0) {} // wait for high
+		print_magnet(1);
 		if (gpio_read(hall_pin) == 0) {
 			
 		}
