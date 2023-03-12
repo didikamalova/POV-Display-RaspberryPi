@@ -33,16 +33,17 @@
 static const unsigned hall_pin = GPIO_PIN2;
 static const unsigned LED_pin = GPIO_PIN3;
 
-// global variable for tracking which magnet we are using
-static unsigned int magnetnum = 0;
-static unsigned int magnetevent = 0;
+// Global variables for magnet event tracking
+static unsigned int totalmagnets = 6;
+static unsigned int magnetnum = 0; // which magnet we have passed
+static unsigned int magnetevent = 0; // high (1) or low (0)
 static unsigned int lastmagnetevent = 0;
 
 // Given function from Pat's hall.c code
-void print_magnet(unsigned int vout)
-{
-    printf(vout ?  "magnet out of range\n" : "magnet detected\n" );
-}
+//void print_magnet(unsigned int vout)
+//{
+//    printf(vout ?  "magnet out of range\n" : "magnet detected\n" );
+//}
 
 void handle_hall(unsigned int pc, void *aux_data) {
 	rb_t *rb = (rb_t *) aux_data;
@@ -53,7 +54,8 @@ void handle_hall(unsigned int pc, void *aux_data) {
 			lastmagnetevent = 1;
 	
 			// change comparison val depending on how many magnets we use
-			if (magnetnum == 9) magnetnum = 1;
+			if (magnetnum > totalmagnets) magnetnum = 1;
+
 			rb_enqueue(rb, magnetnum);
 		}
 
@@ -81,7 +83,8 @@ void main(void) {
 	while (1) {
 		while(rb_empty(rb)) {};
 		rb_dequeue(rb, &which_magnet);
-		printf("%d\n", which_magnet);
+//		printf("%d\n", which_magnet);
+		uart_putchar('+');
 		lastmagnetevent = 0;
 	}
 
