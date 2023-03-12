@@ -1,4 +1,4 @@
-NAME = spi
+NAME = neopixel
 
 CFLAGS = -g -Wall -Og -std=c99 -ffreestanding -I$(CS107E)/include
 LDFLAGS = -nostdlib -T memmap -L$(CS107E)/lib
