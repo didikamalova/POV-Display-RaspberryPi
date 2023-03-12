@@ -1,5 +1,6 @@
-NAME = neopixel
+NAME = led
 
+MODULES = spi.o
 CFLAGS = -g -Wall -Og -std=c99 -ffreestanding -I$(CS107E)/include
 LDFLAGS = -nostdlib -T memmap -L$(CS107E)/lib
 LDLIBS = -lpi -lgcc
@@ -9,7 +10,7 @@ all : $(NAME).bin
 %.bin: %.elf
 	arm-none-eabi-objcopy $< -O binary $@
 
-%.elf: %.o neo_timing.o
+%.elf: %.o $(MODULES)
 	arm-none-eabi-gcc $(LDFLAGS) $^ $(LDLIBS) -o $@
 
 %.o: %.c
