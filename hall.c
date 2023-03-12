@@ -22,38 +22,76 @@
 
 #include "gpio.h"
 #include "gpio_extra.h"
+#include "gpio_interrupts.h"
 #include "uart.h"
 #include "printf.h"
-//#include "interrupts.h"
+#include "interrupts.h"
 #include "timer.h"
+#include "ringbuffer.h"
 
+// chang I/O pins as needed
+static const unsigned hall_pin = GPIO_PIN2;
+static const unsigned LED_pin = GPIO_PIN3;
+
+// global variable for tracking which magnet we are using
+static unsigned int magnetnum = 0;
+static unsigned int magnetevent = 0;
+static unsigned int lastmagnetevent = 0;
+
+// Given function from Pat's hall.c code
 void print_magnet(unsigned int vout)
 {
     printf(vout ?  "magnet out of range\n" : "magnet detected\n" );
 }
 
+void handle_hall(unsigned int pc, void *aux_data) {
+	rb_t *rb = (rb_t *) aux_data;
+	if (gpio_check_and_clear_event(hall_pin)) {
+		magnetevent = 1;
+		if (lastmagnetevent == 0) {
+			magnetnum++;
+			lastmagnetevent = 1;
+	
+			// change comparison val depending on how many magnets we use
+			if (magnetnum == 9) magnetnum = 1;
+			rb_enqueue(rb, magnetnum);
+		}
+
+	}
+}
+
 void main(void) {
-	const unsigned hall_pin= GPIO_PIN2;
-	const unsigned LED_pin = GPIO_PIN3;
+	rb_t *rb = rb_new();
 
-//	interrupts_init();
     gpio_init();
-//	interrupts_global_enable();
-
     uart_init();
 
+	gpio_set_input(hall_pin);
   	gpio_set_function(hall_pin, GPIO_FUNC_INPUT);
   	gpio_set_pullup(hall_pin);
+	gpio_enable_event_detection(hall_pin, GPIO_DETECT_HIGH_LEVEL);
 
-    // vout is 1 when the magnet is out of range of the sensor
-    print_magnet(1);
-	while(1) {
-  		while(gpio_read(vout) == 1) {} // wait for low
-	print_magnet(0);
-  		while(gpio_read(vout) == 0) {} // wait for high
-		print_magnet(1);
-		if (gpio_read(hall_pin) == 0) {
-			
-		}
+	interrupts_init();
+	gpio_interrupts_init();
+	gpio_interrupts_register_handler(hall_pin, handle_hall, rb);
+	gpio_interrupts_enable();
+	interrupts_global_enable();
+
+	int which_magnet = 0;
+	while (1) {
+		while(rb_empty(rb)) {};
+		rb_dequeue(rb, &which_magnet);
+		printf("%d\n", which_magnet);
+		lastmagnetevent = 0;
 	}
+
+	// PAT'S ORIGINAL CODE
+    // vout is 1 when the magnet is out of range of the sensor
+//    print_magnet(1);
+//	while(1) {
+//  	while(gpio_read(hall_pin) == 1) {} // wait for low
+//		print_magnet(0);
+// 		while(gpio_read(hall_pin) == 0) {} // wait for high
+//		print_magnet(1);		
+//		}
 }
