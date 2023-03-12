@@ -1,3 +1,6 @@
+#ifndef LED_H
+#define LED_H
+
 #include "spi.h"
 #include "uart.h"
 
@@ -14,3 +17,5 @@ void get_pixel(self, led_num);
 
 // Sets the color of one pixel in the LED stripe.
 void set_pixel(led_num, red, green, blue, bright_percent);
+
+#endif
