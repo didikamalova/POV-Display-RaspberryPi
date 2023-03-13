@@ -4,18 +4,23 @@
 #include "spi.h"
 #include "uart.h"
 
+#define NUM_LEDS 6 // number of LEDs
+
 /* Some functions we might want to implement */
 
 // initialize the LED strip
 void led_init(void);
 
-// clear strip
-void clear_strip(void);
+// sets the color of one pixel in the LED stripe.
+void set_pixel(int pixel, unsigned char r, unsigned char g, unsigned char b);
 
-// Gets the color and brightness of one pixel in the LED stripe.
-void get_pixel(self, led_num);
+// diplays the led frame contents
+void led_show(void);
 
-// Sets the color of one pixel in the LED stripe.
-void set_pixel(led_num, red, green, blue, bright_percent);
+// gets the color and brightness of one pixel in the LED stripe.
+void get_pixel(int pixel);
+
+// clear strip and set every led to one color
+void clear_strip(unsigned int r, unsigned int g, unsigned int b);
 
 #endif
