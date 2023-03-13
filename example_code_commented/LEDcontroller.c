@@ -75,12 +75,13 @@ void LEDController::core1_write_pixels()
     while (true)
     {
         const absolute_time_t curr_time = get_absolute_time();
-        rttMeasure.getCurrentColumn(curr_time, column, opposite_column);  
+        rttMeasure.getCurrentColumn(curr_time, column, opposite_column); // find column and opposite column number
         if (column != last_column){
             mutex_enter_blocking(&mutex);
             const uint8_t *render_buff = ledController.getRenderBuffer();
 
             ledController.put_start_frame(pio, sm);
+			// number of bytes per column, iterate
             for (int i = 0; i < N_BUFFER_SIZE_PER_COLUMN; i += N_CHANNELS_PER_PIXEL)
             {
                 ledController.put_rgb888(pio, sm,
@@ -89,6 +90,7 @@ void LEDController::core1_write_pixels()
                                             render_buff[column * N_BUFFER_SIZE_PER_COLUMN + i + 2]
                                         );
             }
+			// render opposite column
             for (int i = (N_VERTICAL_RESOLUTION - 1) *N_CHANNELS_PER_PIXEL; i >= 0; i -= N_CHANNELS_PER_PIXEL)
             {
                 ledController.put_rgb888(pio, sm,
