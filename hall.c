@@ -1,3 +1,4 @@
+#include "constants.h"
 /*
  * hall effect sensor 3144.
  *
@@ -38,7 +39,7 @@ static unsigned int totalmagnets = 6;
 static unsigned int magnetnum = 0; // which magnet we have passed
 static unsigned int magnetevent = 0; // high (1) or low (0)
 static unsigned int lastmagnetevent = 0;
-
+int which_magnet;
 // Given function from Pat's hall.c code
 //void print_magnet(unsigned int vout)
 //{
@@ -79,7 +80,7 @@ void main(void) {
 	gpio_interrupts_enable();
 	interrupts_global_enable();
 
-	int which_magnet = 0;
+	which_magnet = 0;
 	while (1) {
 		while(rb_empty(rb)) {};
 		rb_dequeue(rb, &which_magnet);

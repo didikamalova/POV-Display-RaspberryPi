@@ -60,7 +60,8 @@ void LEDController::core1_write_pixels()
     LEDController &ledController = getInstance();
 
     ledController.put_start_frame(pio, sm);
-    for (int i = 0; i < 2*N_BUFFER_SIZE_PER_COLUMN; i += N_CHANNELS_PER_PIXEL)
+    for (int i = 0; i < 2*N_BUFFER_SIZE_PER_COLUMN; i += N_CHANNELS_PER_PIXEL) 
+	// this sets the entire buffer (virtual and non) to 0
     {
         ledController.put_rgb888(pio, sm,
                                     0,  //render_buff[column * N_BUFFER_SIZE_PER_COLUMN + i],
@@ -75,22 +76,28 @@ void LEDController::core1_write_pixels()
     while (true)
     {
         const absolute_time_t curr_time = get_absolute_time();
+		// this is based on rotational speed and horizontal resolution
+		// this finds the current column number and opposite column number across circumference of sphere
         rttMeasure.getCurrentColumn(curr_time, column, opposite_column); // find column and opposite column number
         if (column != last_column){
             mutex_enter_blocking(&mutex);
-            const uint8_t *render_buff = ledController.getRenderBuffer();
+            const uint8_t *render_buff = ledController.getRenderBuffer(); 
 
             ledController.put_start_frame(pio, sm);
 			// number of bytes per column, iterate
             for (int i = 0; i < N_BUFFER_SIZE_PER_COLUMN; i += N_CHANNELS_PER_PIXEL)
             {
+			    // change each pixel in column to the value defined in render_buff index
+				// column*BUFFER_SIZE_PER_COLUMN to find location of in entire array
+				// this is technicall for a 1D array of columns and rows - so multiplying by buffer size per column
+				// gives you the correct row location to write to on globe 
                 ledController.put_rgb888(pio, sm,
                                             render_buff[column * N_BUFFER_SIZE_PER_COLUMN + i],
                                             render_buff[column * N_BUFFER_SIZE_PER_COLUMN + i + 1],
                                             render_buff[column * N_BUFFER_SIZE_PER_COLUMN + i + 2]
                                         );
             }
-			// render opposite column
+			// render opposite column as well
             for (int i = (N_VERTICAL_RESOLUTION - 1) *N_CHANNELS_PER_PIXEL; i >= 0; i -= N_CHANNELS_PER_PIXEL)
             {
                 ledController.put_rgb888(pio, sm,
@@ -109,7 +116,7 @@ void LEDController::core1_write_pixels()
             ledController.put_start_frame(pio, sm);
             for (int i = 0; i < 2*N_BUFFER_SIZE_PER_COLUMN; i += N_CHANNELS_PER_PIXEL)
             {
-                ledController.put_rgb888(pio, sm, 0, 0, 0);
+                ledController.put_rgb888(pio, sm, 0, 0, 0); // set everything to 0 - white or off?
             }
             ledController.put_end_frame(pio, sm);
         }
