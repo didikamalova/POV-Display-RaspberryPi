@@ -5,7 +5,7 @@
 #define HORIZONTAL_RESOLUTION 120 // calculate this by doing math - circumference/width of LED strip
 #define CHANNELS_PER_PIXEL 4 // RGBA
 
-#define NUM_MAGNETS 6
+#define NUM_MAGNETS 3
 
 // can add gpio pin numbers for spi clock etc, and hall sensor
 // add brightness level as well

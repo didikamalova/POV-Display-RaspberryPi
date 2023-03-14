@@ -25,12 +25,12 @@ static volatile int cur_magnet = 0;
 static unsigned int measured_intervals[NUM_MAGNETS*3];
 static unsigned int avg_intervals[NUM_MAGNETS];
 static unsigned int measured_RTT[4];
-static unsigned int col_start_in_segment[NUM_MAGNETS - 1];
+static unsigned int col_start_in_segment[NUM_MAGNETS];
 //static unsigned int time_per_col;
-unsigned int event_time;
-unsigned int prev_time;
+volatile unsigned int event_time;
+volatile unsigned int prev_time = 0;
 unsigned int RTT_time = 0;
-unsigned int column = 0;
+volatile unsigned int column = 0;
 
 void find_avg_intervals(void);
 void find_start_col_segment(void);
@@ -74,13 +74,12 @@ unsigned int last_hall_event_time(void) {
 }
 
 void find_measured_intervals(void) {
+		    get_event_time_init();
+		    while (last_hall_event_time() == prev_time) {
+			    get_event_time_init();
+			}
+			prev_time = last_hall_event_time();
     for (int i = 0; i < NUM_MAGNETS*3; i++) {
-	    if (measured_intervals[0] == '\0') {
-		    measured_intervals[0] = last_hall_event_time();
-			prev_time = measured_intervals[i];
-			measured_RTT[0] = prev_time;
-	    }
-		else {
 		    get_event_time_init();
 		    while (last_hall_event_time() == prev_time) {
 			    get_event_time_init();
@@ -90,8 +89,6 @@ void find_measured_intervals(void) {
 			if (i == NUM_MAGNETS || i == NUM_MAGNETS*2) {
 			    measured_RTT[i / NUM_MAGNETS] = prev_time;
 			}
-
-		}
 	}
 	get_event_time_init();
     while (last_hall_event_time() == prev_time) {
@@ -116,14 +113,20 @@ void find_avg_intervals(void) {
 }
 
 unsigned int time_per_column(void) {
+    //printf("RTT time: %d\n", RTT_time); // CONSIDER CHANGING THE WAY RTT TIME IS CALCUALTED BY USING AVG TIME INSTEAD OF AVERAGING TIMES ON YOUR OWN
     return RTT_time / HORIZONTAL_RESOLUTION;
 }
 
 
 void find_start_col_segment(void) {
      col_start_in_segment[0] = 0;
-     for (int i = 1; i < NUM_MAGNETS - 1; i++) {
-          col_start_in_segment[i] = col_start_in_segment[i-1] + (avg_intervals[i] / time_per_column());
+     //printf("column start: %d ", col_start_in_segment[0]);
+	 //printf("average interval: %d\n", avg_intervals[0] / 1000);
+     for (int i = 1; i < NUM_MAGNETS; i++) {
+	      //printf("time per col: %d\n", time_per_column() / 1000);
+          col_start_in_segment[i] = col_start_in_segment[i-1] + (avg_intervals[i-1] / time_per_column());
+		  //printf("column start: %d ", col_start_in_segment[i]);
+		  //printf("average interval: %d\n", avg_intervals[i] / 1000);
 	 }
 }
 
@@ -146,6 +149,8 @@ void get_imm_event_time(void) {
 void find_column(void) {
     get_imm_event_time();
 	unsigned int time_since_event = timer_get_ticks() - last_hall_event_time();
+	//printf("%d\n", time_since_event / 1000000);
+	//printf("%d\n" , col_start_in_segment[cur_magnet-1]);
     column = col_start_in_segment[cur_magnet - 1] + (time_since_event / time_per_column());
 }
 
@@ -186,6 +191,15 @@ void find_column(void) {
 
 void main(void) {
     RTT_init();
-	find_column();
-	printf("%d", column);
+	//unsigned int prev_column = -1;
+	//hall_init();
+	while (1) {
+	    //int magnet = hall_read_event();
+		//printf("%d", magnet);
+	    find_column();
+	//	if (column != prev_column) {
+	        printf("%d\n", column);
+		    //prev_column = column;
+	//	}
+	}
 }
