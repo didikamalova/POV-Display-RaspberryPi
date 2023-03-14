@@ -72,13 +72,6 @@ void led_show(void)
         spi_txrx(&led_data[i].green, rx, 1);
         spi_txrx(&led_data[i].red, rx, 1);
     }
-
-<<<<<<< HEAD
     //printf("\nEnd frame...\n");
     spi_txrx(end_frame, rx, 1);
 }
-=======
-    // printf("\nEnd frame:\n");
-    spi_transfer(end_frame, rx, NUM_LEDS/2);
-}
->>>>>>> 97f40e92a04ec85177348cd2454db0769749843d
