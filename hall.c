@@ -46,6 +46,8 @@ int which_magnet;
 //    printf(vout ?  "magnet out of range\n" : "magnet detected\n" );
 //}
 
+int get_which_magnet(void);
+
 void handle_hall(unsigned int pc, void *aux_data) {
 	rb_t *rb = (rb_t *) aux_data;
 	if (gpio_check_and_clear_event(hall_pin)) {
@@ -61,6 +63,10 @@ void handle_hall(unsigned int pc, void *aux_data) {
 		}
 
 	}
+}
+
+int get_which_magnet(void) {
+    return which_magnet;
 }
 
 void main(void) {
@@ -99,3 +105,4 @@ void main(void) {
 //		print_magnet(1);		
 //		}
 }
+
