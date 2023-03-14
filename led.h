@@ -6,8 +6,6 @@
 
 #define NUM_LEDS 16 // number of LEDs
 
-/* Some functions we might want to implement */
-
 // initialize the LED strip
 void led_init(void);
 

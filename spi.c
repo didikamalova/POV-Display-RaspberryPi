@@ -75,7 +75,6 @@ void spi_txrx(unsigned char* txbuf, unsigned char* rxbuf, unsigned len)
     *SPI_CS_reg |= SPI_TA_bm;
 
     for (int i=0; i < len; i++) {
-
         // send byte
         *SPI_FIFO_reg = txbuf[i];
 
