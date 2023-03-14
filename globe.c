@@ -1,4 +1,5 @@
 // doing graphics for globe
+// consider converting an image to a bitmap and using that
 
 
 // idea is to have a render buffer and a input buffer
