@@ -10,7 +10,10 @@ APA102 Protocol:
 3. Finish off by cycling the clock line a few times to get all data to the very last LED on the strip
 */
 
-#define CLKDIV 40
+// SPI parameters
+#define POL     0
+#define PHA     1
+#define CLKDIV 50
 
 typedef struct BRGB {
     unsigned char brightness;
@@ -23,7 +26,7 @@ struct BRGB led_data[NUM_LEDS];
 
 void led_init(void)
 {
-    spi_init(SPI_CE0, CLKDIV); 
+    spi_init(POL, PHA, CLKDIV);
 }
 
 void set_pixel(int pixel, unsigned char r, unsigned char g, unsigned char b)
@@ -44,31 +47,32 @@ void clear_strip(unsigned int r, unsigned int g, unsigned int b)
     }
 }
 
-
 void led_show(void)
 {
-    unsigned char start_frame[32] = {0};
-    unsigned char end_frame[NUM_LEDS/2] = {1};
-    unsigned char temp[3] = {1};
+    unsigned char start_frame[4] = {0}; // 32 bits of 0's
+    unsigned char end_frame[NUM_LEDS/16]= {0xFF};
 
-    unsigned char rx[2372];
+    // 8 start bits for each led frame (setup & brightness bit)
+    unsigned char temp = {0xFF};
 
-    // printf("\nStart frame:\n");
-    spi_transfer(start_frame, rx, 32);
+    //int overall = (NUM_LEDS + 1) * 4 + NUM_LEDS/16;
+    unsigned char rx[76];
 
-    // printf("\nLED frames:\n");
+    // printf("\nStart frame...\n");
+    spi_txrx(start_frame, rx, 4);
+
+    // printf("\nLED frames...\n");
     for (int i = 0; i < NUM_LEDS; i++) {
-        spi_transfer(temp, rx, 3);
 
-        // 5 bits for brightness
-        spi_transfer(&led_data[i].brightness, rx, 5);
+        // first 8 bits are 1
+        spi_txrx(temp, rx, 1);
 
         // 8 bits per r, g, b
-        spi_transfer(&led_data[i].blue, rx, 8);
-        spi_transfer(&led_data[i].green, rx, 8);
-        spi_transfer(&led_data[i].red, rx, 8);
+        spi_txrx(&led_data[i].blue, rx, 1);
+        spi_txrx(&led_data[i].green, rx, 1);
+        spi_txrx(&led_data[i].red, rx, 1);
     }
 
-    // printf("\nEnd frame:\n");
-    spi_transfer(end_frame, rx, NUM_LEDS/2);
+    //printf("\nEnd frame...\n");
+    spi_txrx(end_frame, rx, 1);
 }
