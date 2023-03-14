@@ -53,7 +53,7 @@ unsigned int get_event_time() {
 
 
 // get column
-// call hall sensor code
+// call hall sensor code - while (1), hall read
 // using averages
 // every average is no. of seconds magnets is apart
 // find columns per segment  by doing horizontal res/num of magnets

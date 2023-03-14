@@ -48,6 +48,26 @@ int which_magnet;
 
 int get_which_magnet(void);
 
+void hall_init(void) {
+	rb_t *rb = rb_new();
+
+    gpio_init();
+    uart_init();
+
+	gpio_set_input(hall_pin);
+  	gpio_set_function(hall_pin, GPIO_FUNC_INPUT);
+  	gpio_set_pullup(hall_pin);
+	gpio_enable_event_detection(hall_pin, GPIO_DETECT_HIGH_LEVEL);
+
+	interrupts_init();
+	gpio_interrupts_init();
+	gpio_interrupts_register_handler(hall_pin, handle_hall, rb);
+	gpio_interrupts_enable();
+	interrupts_global_enable();
+	which_magnet = 0;
+
+}
+
 void handle_hall(unsigned int pc, void *aux_data) {
 	rb_t *rb = (rb_t *) aux_data;
 	if (gpio_check_and_clear_event(hall_pin)) {
@@ -69,31 +89,14 @@ int get_which_magnet(void) {
     return which_magnet;
 }
 
-void main(void) {
-	rb_t *rb = rb_new();
-
-    gpio_init();
-    uart_init();
-
-	gpio_set_input(hall_pin);
-  	gpio_set_function(hall_pin, GPIO_FUNC_INPUT);
-  	gpio_set_pullup(hall_pin);
-	gpio_enable_event_detection(hall_pin, GPIO_DETECT_HIGH_LEVEL);
-
-	interrupts_init();
-	gpio_interrupts_init();
-	gpio_interrupts_register_handler(hall_pin, handle_hall, rb);
-	gpio_interrupts_enable();
-	interrupts_global_enable();
-
-	which_magnet = 0;
-	while (1) {
+void hall_read_event(void) {
+//	while (1) {
 		while(rb_empty(rb)) {};
 		rb_dequeue(rb, &which_magnet);
 //		printf("%d\n", which_magnet);
 		uart_putchar('+');
 		lastmagnetevent = 0;
-	}
+//	}
 
 	// PAT'S ORIGINAL CODE
     // vout is 1 when the magnet is out of range of the sensor
