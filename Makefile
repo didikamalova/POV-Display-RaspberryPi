@@ -1,6 +1,5 @@
-NAME = test_led
+NAME = RTTmeasure hall
 
-MODULES = spi.o led.o
 CFLAGS = -g -Wall -Og -std=c99 -ffreestanding -I$(CS107E)/include
 LDFLAGS = -nostdlib -T memmap -L$(CS107E)/lib
 LDLIBS = -lpi -lgcc
@@ -10,7 +9,7 @@ all : $(NAME).bin
 %.bin: %.elf
 	arm-none-eabi-objcopy $< -O binary $@
 
-%.elf: %.o $(MODULES)
+%.elf: %.o neo_timing.o
 	arm-none-eabi-gcc $(LDFLAGS) $^ $(LDLIBS) -o $@
 
 %.o: %.c
@@ -30,4 +29,4 @@ clean:
 
 .PHONY: all clean run
 
-.PRECIOUS: %.o %.elf
+.PRECIOUS: %.elf %.o

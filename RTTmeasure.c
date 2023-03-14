@@ -1,6 +1,8 @@
 #include "hall.c"
 #include "timer.h"
 #include "constants.h"
+#include "printf.h"
+#include "string.h"
 
 // code to measure the speed
 // frames per second is defined by no of rotations of motor per second (or RPM/60)
@@ -26,16 +28,20 @@ static unsigned int measured_RTT[4];
 static unsigned int col_start_in_segment[NUM_MAGNETS - 1];
 //static unsigned int time_per_col;
 unsigned int event_time;
+unsigned int prev_time;
 unsigned int RTT_time = 0;
 unsigned int column = 0;
+
+void find_avg_intervals(void);
+void find_start_col_segment(void);
 
 // we need RTT init for initializing hall sensor and then calculating these averages
 void RTT_init(void) {
     hall_init(); // hall code now initialized
 	timer_init();
-	memset(measured_intervals, sizeof(measured_intervals), '\0');
-	memset(avg_intervals, sizeof(avg_intervals), '\0');
-	memset(measured_RTT, sizeof(measured_RTT), '\0');
+	memset(measured_intervals, '\0', sizeof(measured_intervals));
+	memset(avg_intervals, '\0', sizeof(avg_intervals));
+	memset(measured_RTT, '\0', sizeof(measured_RTT));
 
 	find_avg_intervals();
 	find_start_col_segment();
@@ -70,8 +76,8 @@ unsigned int last_hall_event_time(void) {
 void find_measured_intervals(void) {
     for (int i = 0; i < NUM_MAGNETS*3; i++) {
 	    if (measured_intervals[0] == '\0') {
-		    measured_intervals[0] == last_hall_event_time();
-			unsigned int prev_time = measured_intervals[i];
+		    measured_intervals[0] = last_hall_event_time();
+			prev_time = measured_intervals[i];
 			measured_RTT[0] = prev_time;
 	    }
 		else {
@@ -177,3 +183,9 @@ void find_column(void) {
 // workflow to use this module:
 // RTT_init()
 // need to end up constantly reading columns not to miss one as the globe spins
+
+void main(void) {
+    RTT_init();
+	find_column();
+	printf("%d", column);
+}

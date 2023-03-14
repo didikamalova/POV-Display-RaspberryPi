@@ -30,6 +30,8 @@
 #include "timer.h"
 #include "ringbuffer.h"
 
+void handle_hall(unsigned int pc, void *aux_data);
+
 // chang I/O pins as needed
 static const unsigned hall_pin = GPIO_PIN2;
 static const unsigned LED_pin = GPIO_PIN3;
@@ -40,6 +42,8 @@ static unsigned int magnetnum = 0; // which magnet we have passed
 static unsigned int magnetevent = 0; // high (1) or low (0)
 static unsigned int lastmagnetevent = 0;
 int which_magnet;
+
+rb_t *rb;
 // Given function from Pat's hall.c code
 //void print_magnet(unsigned int vout)
 //{
@@ -49,7 +53,8 @@ int which_magnet;
 int get_which_magnet(void);
 
 void hall_init(void) {
-	rb_t *rb = rb_new();
+	//rb_t *rb = rb_new();
+	rb = rb_new();
 
     gpio_init();
     uart_init();
