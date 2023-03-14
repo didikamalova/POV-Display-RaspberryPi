@@ -89,13 +89,14 @@ int get_which_magnet(void) {
     return which_magnet;
 }
 
-void hall_read_event(void) {
+int hall_read_event(void) {
 //	while (1) {
-		while(rb_empty(rb)) {};
+		while(rb_empty(rb)) {/* spin */};
 		rb_dequeue(rb, &which_magnet);
 //		printf("%d\n", which_magnet);
-		uart_putchar('+');
+		//uart_putchar('+');
 		lastmagnetevent = 0;
+		return which_magnet;
 //	}
 
 	// PAT'S ORIGINAL CODE

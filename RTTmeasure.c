@@ -18,9 +18,33 @@
 // it. I think we won't? We must always think about orientation when running the code,
 // if orientation ever matters i.e. when projecting a static image of a face.
 
-int prev_magnet = 0;
+static volatile int prev_magnet = 0;
+static volatile int cur_magnet = 0;
+static unsigned int measured_intervals[NUM_MAGNETS*3];
+static unsigned int avg_intervals[NUM_MAGNETS];
+static unsigned int measured_RTT[4];
+static unsigned int col_start_in_segment[NUM_MAGNETS - 1];
+//static unsigned int time_per_col;
+unsigned int event_time;
+unsigned int RTT_time = 0;
+unsigned int column = 0;
 
-// timer_init()
+// we need RTT init for initializing hall sensor and then calculating these averages
+void RTT_init(void) {
+    hall_init(); // hall code now initialized
+	timer_init();
+	memset(measured_intervals, sizeof(measured_intervals), '\0');
+	memset(avg_intervals, sizeof(avg_intervals), '\0');
+	memset(measured_RTT, sizeof(measured_RTT), '\0');
+
+	find_avg_intervals();
+	find_start_col_segment();
+
+	//measured_intervals = malloc(NUM_MAGNETS*3);
+	//avg_intervals = malloc(NUM_MAGNETS);
+	//need to be constantly reading events though like in keyboard
+}
+
 //use timer_get_ticks()
 
 // we should be running the hall code in this file
@@ -31,15 +55,93 @@ int prev_magnet = 0;
 // add times to a list in that file and then use the info from that here?
 
 // last event time
-unsigned int get_event_time() {
-    if (get_which_magnet() != prev_magnet) {
-		
-	} 
+void get_event_time_init(void) {
+    cur_magnet = hall_read_event(); // must continuously read this somewhere in code
+    if (cur_magnet != prev_magnet) {
+		prev_magnet = cur_magnet;
+		event_time = timer_get_ticks();
+	}
+}
+
+unsigned int last_hall_event_time(void) {
+    return event_time;
+}
+
+void find_measured_intervals(void) {
+    for (int i = 0; i < NUM_MAGNETS*3; i++) {
+	    if (measured_intervals[0] == '\0') {
+		    measured_intervals[0] == last_hall_event_time();
+			unsigned int prev_time = measured_intervals[i];
+			measured_RTT[0] = prev_time;
+	    }
+		else {
+		    get_event_time_init();
+		    while (last_hall_event_time() == prev_time) {
+			    get_event_time_init();
+			}
+			measured_intervals[i] = last_hall_event_time() - prev_time;
+			prev_time = last_hall_event_time();
+			if (i == NUM_MAGNETS || i == NUM_MAGNETS*2) {
+			    measured_RTT[i / NUM_MAGNETS] = prev_time;
+			}
+
+		}
+	}
+	get_event_time_init();
+    while (last_hall_event_time() == prev_time) {
+		get_event_time_init();
+    }
+    measured_RTT[3] = last_hall_event_time();
 }
 
 
-// new event time function
+// once we have the measured intervals, we no longer care about the ringbuffer
+// we just want which_magnet at any given moment
+void find_avg_intervals(void) {
+    find_measured_intervals();
+    for (int i = 0; i < NUM_MAGNETS; i++) {
+		avg_intervals[i] = (measured_intervals[i] + measured_intervals[NUM_MAGNETS] + 
+								measured_intervals[NUM_MAGNETS*2])/3;
+	}
+    for (int i = 0; i < 2; i++) {
+		RTT_time += measured_RTT[i+1] - measured_RTT[i];
+	}
+	RTT_time /= 3;
+}
 
+unsigned int time_per_column(void) {
+    return RTT_time / HORIZONTAL_RESOLUTION;
+}
+
+
+void find_start_col_segment(void) {
+     col_start_in_segment[0] = 0;
+     for (int i = 1; i < NUM_MAGNETS - 1; i++) {
+          col_start_in_segment[i] = col_start_in_segment[i-1] + (avg_intervals[i] / time_per_column());
+	 }
+}
+
+unsigned int time_in_cur_segment(void) {
+    return avg_intervals[cur_magnet - 1];
+}
+
+// call this
+// then read last_hall_event_time
+// use this to calculate col
+void get_imm_event_time(void) {
+   cur_magnet = get_which_magnet();
+   if (cur_magnet != prev_magnet) {
+		event_time = timer_get_ticks();
+		prev_magnet = cur_magnet;
+   }
+}
+
+// new event time function
+void find_column(void) {
+    get_imm_event_time();
+	unsigned int time_since_event = timer_get_ticks() - last_hall_event_time();
+    column = col_start_in_segment[cur_magnet - 1] + (time_since_event / time_per_column());
+}
 
 // let's assume every magnet is same fixed distance apart
 
@@ -72,3 +174,6 @@ unsigned int get_event_time() {
 // we should have at least NUM_MAGNETS*3 event times
 
 
+// workflow to use this module:
+// RTT_init()
+// need to end up constantly reading columns not to miss one as the globe spins
