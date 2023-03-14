@@ -4,7 +4,7 @@
 #include "spi.h"
 #include "uart.h"
 
-#define NUM_LEDS 6 // number of LEDs
+#define NUM_LEDS 16 // number of LEDs
 
 /* Some functions we might want to implement */
 

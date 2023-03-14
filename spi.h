@@ -1,16 +1,7 @@
 #ifndef SPI_H
 #define SPI_H
 
-/*
- * Author: Omar Rizwan <osnr@stanford.edu>
- *
- * Date: May 9, 2016
- */
+void spi_init(unsigned pol, unsigned pha, unsigned clk_div);
+void spi_txrx(unsigned char* txbuf, unsigned char* rxbuf, unsigned len);
 
-#define SPI_CE0 0
-#define SPI_CE1 1
-
-void spi_init(unsigned chip_select, unsigned clock_divider);
-void spi_transfer(unsigned char *tx, unsigned char *rx, unsigned len);
-
-#endif /* SPI_H */
+#endif

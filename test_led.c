@@ -11,8 +11,8 @@ void main(void)
     led_init();
     printf("LED strip initialized!\n");
 
-    clear_strip(255, 0, 0);
+    clear_strip(0, 0, 0);
     led_show();
-
+    
     uart_putchar(EOT);
 }
