@@ -41,7 +41,7 @@ static unsigned int totalmagnets = NUM_MAGNETS;
 static unsigned int magnetnum = 0; // which magnet we have passed
 static unsigned int magnetevent = 0; // high (1) or low (0)
 static unsigned int lastmagnetevent = 0;
-int which_magnet;
+volatile int which_magnet;
 
 rb_t *rb;
 // Given function from Pat's hall.c code
@@ -50,7 +50,7 @@ rb_t *rb;
 //    printf(vout ?  "magnet out of range\n" : "magnet detected\n" );
 //}
 
-int get_which_magnet(void);
+//int get_which_magnet(void);
 
 void hall_init(void) {
 	//rb_t *rb = rb_new();
@@ -90,7 +90,8 @@ void handle_hall(unsigned int pc, void *aux_data) {
 	}
 }
 
-int get_which_magnet(void) {
+volatile int get_which_magnet(void) {
+    printf("get which magnet: %d\n", which_magnet);
     return which_magnet;
 }
 
@@ -115,3 +116,10 @@ int hall_read_event(void) {
 //		}
 }
 
+
+//void main(void) {
+//    hall_init();
+//	while (1) {
+//	     printf("%d\n", hall_read_event());
+//	}
+//}
