@@ -1,6 +1,6 @@
 NAME = test_led
 
-MODULES = spi.o led.o
+MODULES = spi.o apa102.o
 CFLAGS = -g -Wall -Og -std=c99 -ffreestanding -I$(CS107E)/include
 LDFLAGS = -nostdlib -T memmap -L$(CS107E)/lib
 LDLIBS = -lpi -lgcc
