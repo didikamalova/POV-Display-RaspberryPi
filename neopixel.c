@@ -8,6 +8,7 @@
 #include "gl.h"
 #include "gpio.h"
 #include "timer.h"
+#include "printf.h"
 
 #define NEO_DATA_GPIO GPIO_PIN20
 
@@ -109,8 +110,21 @@ void generate_display_array(int rows, int leds, color_t color1, color_t color2) 
 		}
 	}
 
+	// DEBUGGING PRINTF STATEMENTS
+//	printf("color: %d\n", display[0][0]);
+//	printf("color name: %d\n",GL_GREEN);
+//	printf("color name: %d\n",GL_BLUE);
+//	for (int i = 0; i < leds; i++) {
+//		printf("color: %d\n", display[0][i]);
+//	}
+	
+	// some observations: must be alternating between states for display to work
+	int n;
 	while(1) {
-		send_sequence(display[1],leds,0);
+		n = sizeof(display[0])/sizeof(*display[0]);
+		send_sequence(display[0],n,0);
+		timer_delay(1);
+		send_sequence(display[1],n,0);
 //		for (int i = 0; i < rows; i++) {
 //			send_sequence(display[i],leds,0);
 //			timer_delay(1);
@@ -129,5 +143,5 @@ void main(void)
 //    rainbow();
 //    number of neopixels on our current np LED strip: 72
 //    cycle(GL_PURPLE, 72);
-	generate_display_array(5, 72, GL_GREEN, GL_BLUE);
+	generate_display_array(5, 70, GL_GREEN, GL_BLUE);
 }
