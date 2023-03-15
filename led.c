@@ -11,9 +11,9 @@ APA102 Protocol:
 */
 
 // SPI parameters
-#define POL     1
+#define POL     0
 #define PHA     0
-#define CLKDIV 50
+#define CLKDIV 2000
 
 typedef struct BRGB {
     unsigned char brightness;
@@ -40,7 +40,7 @@ void set_pixel(int pixel, unsigned char r, unsigned char g, unsigned char b)
 void clear_strip(unsigned int r, unsigned int g, unsigned int b)
 {
     for (int i = 0; i < NUM_LEDS; i++) {
-        led_data[i].brightness = 31;
+        led_data[i].brightness = 255;
         led_data[i].red = r;
         led_data[i].green = g;
         led_data[i].blue = b;
@@ -49,27 +49,22 @@ void clear_strip(unsigned int r, unsigned int g, unsigned int b)
 
 void led_show(void)
 {
-    //int end_frame_len = (NUM_LEDS + 15) / 16;
     unsigned char start_frame[4] = {0}; // 4 bytes of 0's
-    //unsigned char end_frame[end_frame_len] = {0xFF};
+    unsigned char end_frame[(NUM_LEDS+15)/16] = {0};
 
-    // 8 start bits for each led frame (setup & brightness bit)
     unsigned char temp = {0xFF};
 
-    //int overall = (NUM_LEDS + 1) * 4 + NUM_LEDS/16;
-    unsigned char rx[76];
+    int overall = (NUM_LEDS+1)*4 + (NUM_LEDS+15)/16;
+    unsigned char rx[overall];
 
     spi_txrx(start_frame, rx, 4);
 
     for (int i = 0; i < NUM_LEDS; i++) {
-        // first byte set to 8
-        spi_txrx(temp, rx, 1);
-
-        // 1 byte per r, g, b
+        spi_txrx(&led_data[i].brightness, rx, 1);
         spi_txrx(&led_data[i].blue, rx, 1);
         spi_txrx(&led_data[i].green, rx, 1);
         spi_txrx(&led_data[i].red, rx, 1);
     }
 
-    spi_txrx(temp, rx, 1);
+    spi_txrx(end_frame, rx, (NUM_LEDS+15)/16);
 }

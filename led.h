@@ -4,7 +4,7 @@
 #include "spi.h"
 #include "uart.h"
 
-#define NUM_LEDS 16 // number of LEDs
+#define NUM_LEDS 72 // number of LEDs
 
 // initialize the LED strip
 void led_init(void);
