@@ -2,6 +2,9 @@
  * Julie Zelenski, Winter 2019
  * Sample program to drive strip of Neopixels (WS2811/2812 LEDs)
  */
+
+// Editing this code to mess around with graphics arrays on the neopixel strip
+
 #include "gl.h"
 #include "gpio.h"
 #include "timer.h"
@@ -93,12 +96,38 @@ void cycle(color_t color, int nleds)
     }
 }
 
+// general test function to generate a display buffer and iterate through each col
+void generate_display_array(int rows, int leds, color_t color1, color_t color2) {
+	color_t display[rows][leds]; 
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < leds; j++) {
+			if (i % 2 == 0) {
+				display[i][j] = color1;
+			} else {
+				display[i][j] = color2;
+			}
+		}
+	}
+
+	while(1) {
+		send_sequence(display[1],leds,0);
+//		for (int i = 0; i < rows; i++) {
+//			send_sequence(display[i],leds,0);
+//			timer_delay(1);
+//		}
+	}
+	
+}
+
+
 void main(void) 
 {
     gpio_init();
     timer_init();
     gpio_set_output(NEO_DATA_GPIO);
 
-    rainbow();
-//    cycle(GL_PURPLE, 8);
+//    rainbow();
+//    number of neopixels on our current np LED strip: 72
+//    cycle(GL_PURPLE, 72);
+	generate_display_array(5, 72, GL_GREEN, GL_BLUE);
 }
