@@ -112,7 +112,7 @@ void find_avg_intervals(void) {
 	RTT_time /= 3;
 }
 
-unsigned int time_per_column(void) {
+const unsigned int time_per_column(void) {
     //printf("RTT time: %d\n", RTT_time); // CONSIDER CHANGING THE WAY RTT TIME IS CALCUALTED BY USING AVG TIME INSTEAD OF AVERAGING TIMES ON YOUR OWN
     return RTT_time / HORIZONTAL_RESOLUTION;
 }
@@ -120,13 +120,13 @@ unsigned int time_per_column(void) {
 
 void find_start_col_segment(void) {
      col_start_in_segment[0] = 0;
-     //printf("column start: %d ", col_start_in_segment[0]);
-	 //printf("average interval: %d\n", avg_intervals[0] / 1000);
+     printf("column start: %d ", col_start_in_segment[0]);
+	 printf("average interval: %d\n", avg_intervals[0] / 1000);
      for (int i = 1; i < NUM_MAGNETS; i++) {
 	      //printf("time per col: %d\n", time_per_column() / 1000);
           col_start_in_segment[i] = col_start_in_segment[i-1] + (avg_intervals[i-1] / time_per_column());
-		  //printf("column start: %d ", col_start_in_segment[i]);
-		  //printf("average interval: %d\n", avg_intervals[i] / 1000);
+		  printf("column start: %d ", col_start_in_segment[i]);
+		  printf("average interval: %d\n", avg_intervals[i] / 1000);
 	 }
 }
 
@@ -148,10 +148,11 @@ void get_imm_event_time(void) {
 // new event time function
 void find_column(void) {
     get_imm_event_time();
-	unsigned int time_since_event = timer_get_ticks() - last_hall_event_time();
+	volatile unsigned int time_since_event = timer_get_ticks() - last_hall_event_time();
 	//printf("%d\n", time_since_event / 1000000);
 	//printf("%d\n" , col_start_in_segment[cur_magnet-1]);
-    column = col_start_in_segment[cur_magnet - 1] + (time_since_event / time_per_column());
+    column = (col_start_in_segment[cur_magnet - 1] + (time_since_event / time_per_column())) % HORIZONTAL_RESOLUTION;
+	//printf("%d\n", column);
 }
 
 // let's assume every magnet is same fixed distance apart
@@ -191,15 +192,16 @@ void find_column(void) {
 
 void main(void) {
     RTT_init();
-	//unsigned int prev_column = -1;
+	volatile unsigned int prev_column = -1;
 	//hall_init();
 	while (1) {
 	    //int magnet = hall_read_event();
 		//printf("%d", magnet);
 	    find_column();
-	//	if (column != prev_column) {
+		if (column != prev_column) {
 	        printf("%d\n", column);
-		    //prev_column = column;
-	//	}
+		    prev_column = column;
+			//uart_putchar('-');
+		}
 	}
 }
