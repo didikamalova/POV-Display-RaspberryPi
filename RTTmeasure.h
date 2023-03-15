@@ -1,5 +1,7 @@
 #ifndef RTTMEASURE_H
-#define HALL_H
+#define RTTMEASURE_H
+
+#include "hall.h"
 
 // header file for RTTmeasure
 

@@ -50,7 +50,7 @@ rb_t *rb;
 //    printf(vout ?  "magnet out of range\n" : "magnet detected\n" );
 //}
 
-int get_which_magnet(void);
+//int get_which_magnet(void);
 
 void hall_init(void) {
 	//rb_t *rb = rb_new();
@@ -116,3 +116,10 @@ int hall_read_event(void) {
 //		}
 }
 
+
+//void main(void) {
+//    hall_init();
+//	while (1) {
+//	     printf("%d\n", hall_read_event());
+//	}
+//}
