@@ -84,7 +84,7 @@ void find_measured_intervals(void) {
 		    while (last_hall_event_time() == prev_time) {
 			    get_event_time_init();
 			}
-            printf("event time: %d\n", event_time/1000000);
+            //printf("event time: %d\n", event_time/1000000);
 			measured_intervals[i] = last_hall_event_time() - prev_time;
 			prev_time = last_hall_event_time();
 			if (i == NUM_MAGNETS || i == NUM_MAGNETS*2) {
@@ -124,7 +124,7 @@ void find_start_col_segment(void) {
      printf("column start: %d ", col_start_in_segment[0]);
 	 printf("average interval: %d\n", avg_intervals[0] / 1000);
      for (int i = 1; i < NUM_MAGNETS; i++) {
-	      //printf("time per col: %d\n", time_per_column() / 1000);
+	      printf("time per col: %d\n", time_per_column() / 1000);
           col_start_in_segment[i] = col_start_in_segment[i-1] + (avg_intervals[i-1] / time_per_column());
 		  printf("column start: %d ", col_start_in_segment[i]);
 		  printf("average interval: %d\n", avg_intervals[i] / 1000);
@@ -140,7 +140,7 @@ unsigned int time_in_cur_segment(void) {
 // use this to calculate col
 void get_imm_event_time(void) {
    cur_magnet = get_which_magnet();
-   //printf("cur magnet: %d prev_magent: %d", cur_magnet, prev_magnet);
+   //printf("cur magnet: %d prev_magent: %d\n", cur_magnet, prev_magnet);
    if (cur_magnet != prev_magnet) {
 		event_time = timer_get_ticks();
 		prev_magnet = cur_magnet;
@@ -151,10 +151,17 @@ void get_imm_event_time(void) {
 // new event time function
 unsigned int find_column(void) {
     get_imm_event_time();
-	volatile unsigned int time_since_event = timer_get_ticks() - last_hall_event_time();
-	//printf("%d\n", time_since_event / 1000000);
+//	volatile unsigned int time_since_event = timer_get_ticks() - last_hall_event_time();
+//	//printf("%d\n", time_since_event / 1000);
+//	//printf("%d\n" , col_start_in_segment[cur_magnet-1]);
+//	printf("column offset: %d\n", time_since_event/time_per_column());
+//    column = (col_start_in_segment[cur_magnet - 1] + (time_since_event / time_per_column())) % HORIZONTAL_RESOLUTION;
+	if ((timer_get_ticks() - last_hall_event_time()) >= time_per_column()) {
+	//printf("%d\n", time_since_event / 1000);
 	//printf("%d\n" , col_start_in_segment[cur_magnet-1]);
-    column = (col_start_in_segment[cur_magnet - 1] + (time_since_event / time_per_column())) % HORIZONTAL_RESOLUTION;
+	//printf("column offset: %d\n", time_since_event/time_per_column());
+    column = (col_start_in_segment[cur_magnet - 1] + 1) % HORIZONTAL_RESOLUTION;
+	}
 	return column;
 	//printf("%d\n", column);
 }
@@ -201,11 +208,11 @@ void main(void) {
 	while (1) {
 	    //int magnet = hall_read_event();
 		//printf("%d", magnet);
-	    unsigned int column = find_column();
-		if (column != prev_column) {
-	        printf("%d\n", column);
-		    prev_column = column;
-			//uart_putchar('-');
+	    unsigned int fcolumn = find_column();
+		if (fcolumn != prev_column) {
+	        //printf("%d\n", fcolumn);
+		    prev_column = fcolumn;
+			uart_putchar('-');
 		}
 	}
 }

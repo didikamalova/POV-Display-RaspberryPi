@@ -86,13 +86,15 @@ void handle_hall(unsigned int pc, void *aux_data) {
 			if (magnetnum > totalmagnets) magnetnum = 1;
 
 			rb_enqueue(rb, magnetnum);
+			which_magnet = magnetnum;
 		}
 
 	}
 }
 
 volatile int get_which_magnet(void) {
-    printf("get which magnet: %d\n", which_magnet);
+    //printf("get which magnet after avg: %d\n", which_magnet);
+	lastmagnetevent = 0;
     return which_magnet;
 }
 
@@ -103,6 +105,7 @@ int hall_read_event(void) {
 //		printf("%d\n", which_magnet);
 		uart_putchar('+');
 		lastmagnetevent = 0;
+        //printf("get which magnet: %d\n", which_magnet);
 		return which_magnet;
 //	}
 
