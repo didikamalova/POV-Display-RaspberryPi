@@ -5,17 +5,22 @@
 #include "hall.h"
 #include "gpio.h"
 #include "printf.h"
-
+#include "RTTmeasure.h"
+#include "interrupts.h"
 
 void main(void)
 {
 	gpio_init();
 	uart_init();
-	hall_init();
+	printf("Checkpoint\n");
+	RTT_init();
+	printf("Made it\n");
+//	hall_init();
   	apa102_init();
 
 	printf("Now initialize hall:\n");
 //	hall_init();
+//	RTT_init();
 	printf("Hall module initialized.\n");
 
 

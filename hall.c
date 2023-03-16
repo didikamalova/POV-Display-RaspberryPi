@@ -59,7 +59,7 @@ void hall_init(void) {
 
 //    gpio_init();
 //    uart_init();
-
+	printf("initialize interrupts completed\n");
 	gpio_set_input(hall_pin);
   	gpio_set_function(hall_pin, GPIO_FUNC_INPUT);
   	gpio_set_pullup(hall_pin);

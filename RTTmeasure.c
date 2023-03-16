@@ -201,19 +201,19 @@ unsigned int find_column(void) {
 // RTT_init()
 // need to end up constantly reading columns not to miss one as the globe spins
 
-void main(void) {
-    RTT_init();
-	unsigned int prev_column = -1;
-	//hall_init();
-	while (1) {
-	    //int magnet = hall_read_event();
-		//printf("%d", magnet);
-	    unsigned int fcolumn = find_column();
-		if (fcolumn != prev_column) {
-	        //printf("%d\n", fcolumn);
-		    prev_column = fcolumn;
-			uart_putchar('-');
-		}
-	}
-}
-
+//void main(void) {
+//    RTT_init();
+//	unsigned int prev_column = -1;
+//	//hall_init();
+//	while (1) {
+//	    //int magnet = hall_read_event();
+//		//printf("%d", magnet);
+//	    unsigned int fcolumn = find_column();
+//		if (fcolumn != prev_column) {
+//	        //printf("%d\n", fcolumn);
+//		    prev_column = fcolumn;
+//			uart_putchar('-');
+//		}
+//	}
+//}
+//
