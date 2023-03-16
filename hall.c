@@ -29,6 +29,7 @@
 #include "interrupts.h"
 #include "timer.h"
 #include "ringbuffer.h"
+#include "hall.h"
 
 void handle_hall(unsigned int pc, void *aux_data);
 
