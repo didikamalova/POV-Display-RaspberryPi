@@ -57,8 +57,8 @@ void hall_init(void) {
 	//rb_t *rb = rb_new();
 	rb = rb_new();
 
-    gpio_init();
-    uart_init();
+//    gpio_init();
+//    uart_init();
 
 	gpio_set_input(hall_pin);
   	gpio_set_function(hall_pin, GPIO_FUNC_INPUT);
@@ -127,3 +127,4 @@ int hall_read_event(void) {
 //	     printf("%d\n", hall_read_event());
 //	}
 //}
+
