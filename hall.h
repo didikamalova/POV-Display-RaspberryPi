@@ -1,6 +1,8 @@
 #ifndef HALL_H
 #define HALL_H
 
+#include "constants.h"
+
 // header file for hall sensor
 
 void hall_init(void);
