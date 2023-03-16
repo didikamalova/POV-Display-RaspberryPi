@@ -144,6 +144,8 @@ void get_imm_event_time(void) {
    if (cur_magnet != prev_magnet) {
 		event_time = timer_get_ticks();
 		prev_magnet = cur_magnet;
+		column = col_start_in_segment[cur_magnet - 1];
+		printf("new magnet");
    }
    //printf("event time: %d\n", event_time/1000000);
 }
@@ -156,11 +158,12 @@ unsigned int find_column(void) {
 //	//printf("%d\n" , col_start_in_segment[cur_magnet-1]);
 //	printf("column offset: %d\n", time_since_event/time_per_column());
 //    column = (col_start_in_segment[cur_magnet - 1] + (time_since_event / time_per_column())) % HORIZONTAL_RESOLUTION;
-	if ((timer_get_ticks() - last_hall_event_time()) >= time_per_column()) {
+	if ((timer_get_ticks() - event_time) >= time_per_column()) { // NOT GOING INTO THIS CONTINUOUSLY??
 	//printf("%d\n", time_since_event / 1000);
 	//printf("%d\n" , col_start_in_segment[cur_magnet-1]);
 	//printf("column offset: %d\n", time_since_event/time_per_column());
-    column = (col_start_in_segment[cur_magnet - 1] + 1) % HORIZONTAL_RESOLUTION;
+	    printf("changing column");
+        column = (column + 1) % HORIZONTAL_RESOLUTION;
 	}
 	return column;
 	//printf("%d\n", column);
@@ -201,19 +204,19 @@ unsigned int find_column(void) {
 // RTT_init()
 // need to end up constantly reading columns not to miss one as the globe spins
 
-//void main(void) {
-//    RTT_init();
-//	unsigned int prev_column = -1;
-//	//hall_init();
-//	while (1) {
-//	    //int magnet = hall_read_event();
-//		//printf("%d", magnet);
-//	    unsigned int fcolumn = find_column();
-//		if (fcolumn != prev_column) {
-//	        //printf("%d\n", fcolumn);
-//		    prev_column = fcolumn;
-//			uart_putchar('-');
-//		}
-//	}
-//}
+void main(void) {
+    RTT_init();
+	unsigned int prev_column = -1;
+	//hall_init();
+	while (1) {
+	    //int magnet = hall_read_event();
+		//printf("%d", magnet);
+	    unsigned int fcolumn = find_column();
+		//if (fcolumn != prev_column) {
+	        printf("%d\n", fcolumn);
+		    prev_column = fcolumn;
+			//uart_putchar('-');
+		//}
+	}
+}
 //
