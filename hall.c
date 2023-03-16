@@ -56,6 +56,8 @@ rb_t *rb;
 void hall_init(void) {
 	//rb_t *rb = rb_new();
 	rb = rb_new();
+	which_magnet = 0;
+
 
 //    gpio_init();
 //    uart_init();
@@ -65,12 +67,12 @@ void hall_init(void) {
   	gpio_set_pullup(hall_pin);
 	gpio_enable_event_detection(hall_pin, GPIO_DETECT_HIGH_LEVEL);
 
-	interrupts_init();
+    interrupts_init();
 	gpio_interrupts_init();
 	gpio_interrupts_register_handler(hall_pin, handle_hall, rb);
 	gpio_interrupts_enable();
 	interrupts_global_enable();
-	which_magnet = 0;
+
 
 }
 
