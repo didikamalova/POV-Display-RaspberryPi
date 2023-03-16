@@ -1,4 +1,4 @@
-#include "hall.c"
+#include "hall.h"
 #include "timer.h"
 #include "constants.h"
 #include "printf.h"
@@ -84,6 +84,7 @@ void find_measured_intervals(void) {
 		    while (last_hall_event_time() == prev_time) {
 			    get_event_time_init();
 			}
+            printf("event time: %d\n", event_time/1000000);
 			measured_intervals[i] = last_hall_event_time() - prev_time;
 			prev_time = last_hall_event_time();
 			if (i == NUM_MAGNETS || i == NUM_MAGNETS*2) {
@@ -139,19 +140,22 @@ unsigned int time_in_cur_segment(void) {
 // use this to calculate col
 void get_imm_event_time(void) {
    cur_magnet = get_which_magnet();
+   //printf("cur magnet: %d prev_magent: %d", cur_magnet, prev_magnet);
    if (cur_magnet != prev_magnet) {
 		event_time = timer_get_ticks();
 		prev_magnet = cur_magnet;
    }
+   //printf("event time: %d\n", event_time/1000000);
 }
 
 // new event time function
-void find_column(void) {
+unsigned int find_column(void) {
     get_imm_event_time();
 	volatile unsigned int time_since_event = timer_get_ticks() - last_hall_event_time();
 	//printf("%d\n", time_since_event / 1000000);
 	//printf("%d\n" , col_start_in_segment[cur_magnet-1]);
     column = (col_start_in_segment[cur_magnet - 1] + (time_since_event / time_per_column())) % HORIZONTAL_RESOLUTION;
+	return column;
 	//printf("%d\n", column);
 }
 
@@ -192,12 +196,12 @@ void find_column(void) {
 
 void main(void) {
     RTT_init();
-	volatile unsigned int prev_column = -1;
+	unsigned int prev_column = -1;
 	//hall_init();
 	while (1) {
 	    //int magnet = hall_read_event();
 		//printf("%d", magnet);
-	    find_column();
+	    unsigned int column = find_column();
 		if (column != prev_column) {
 	        printf("%d\n", column);
 		    prev_column = column;
