@@ -12,21 +12,9 @@ void main(void)
 {
 	gpio_init();
 	uart_init();
-	printf("Checkpoint\n");
-//	RTT_init();
 	hall_init();
-	printf("Made it\n");
-//	hall_init();
   	apa102_init();
 
-	printf("Now initialize hall:\n");
-//	hall_init();
-//	RTT_init();
-	printf("Hall module initialized.\n");
-
-
-	printf("\nNow driving LED blue on detection: \n");
-//	
 	int something = hall_read_event();
     apa102_clear(255, 255, 0, 0);
 	printf("LED strip driven blue.\n");
