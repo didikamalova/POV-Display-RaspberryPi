@@ -163,6 +163,13 @@ unsigned int find_column(void) {
 	//printf("%d\n", column);
 }
 
+// new event time function
+unsigned int find_opposite_column(void) {
+	return (column + (HORIZONTAL_RESOLUTION/2)) % HORIZONTAL_RESOLUTION;
+	//printf("%d\n", column);
+}
+
+
 // let's assume every magnet is same fixed distance apart
 
 // find intervals function
