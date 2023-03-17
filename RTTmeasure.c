@@ -26,7 +26,6 @@ static unsigned int measured_intervals[NUM_MAGNETS*3];
 static unsigned int avg_intervals[NUM_MAGNETS];
 static unsigned int measured_RTT[4];
 static unsigned int col_start_in_segment[NUM_MAGNETS];
-//static unsigned int time_per_col;
 volatile unsigned int event_time;
 volatile unsigned int prev_time = 0;
 unsigned int RTT_time = 0;
@@ -139,13 +138,15 @@ unsigned int time_in_cur_segment(void) {
 // then read last_hall_event_time
 // use this to calculate col
 void get_imm_event_time(void) {
+   printf("timer before: %d\n", timer_get_ticks());
    cur_magnet = get_which_magnet();
+   printf("timer after: %d\n", timer_get_ticks());
    //printf("cur magnet: %d prev_magent: %d\n", cur_magnet, prev_magnet);
    if (cur_magnet != prev_magnet) {
 		event_time = timer_get_ticks();
 		prev_magnet = cur_magnet;
 		column = col_start_in_segment[cur_magnet - 1];
-		printf("new magnet");
+		printf("new magnet\n");
    }
    //printf("event time: %d\n", event_time/1000000);
 }
@@ -153,16 +154,9 @@ void get_imm_event_time(void) {
 // new event time function
 unsigned int find_column(void) {
     get_imm_event_time();
-//	volatile unsigned int time_since_event = timer_get_ticks() - last_hall_event_time();
-//	//printf("%d\n", time_since_event / 1000);
-//	//printf("%d\n" , col_start_in_segment[cur_magnet-1]);
-//	printf("column offset: %d\n", time_since_event/time_per_column());
-//    column = (col_start_in_segment[cur_magnet - 1] + (time_since_event / time_per_column())) % HORIZONTAL_RESOLUTION;
+    printf("timer: %d event_time: %d difference: %d time_per_column: %d\n", timer_get_ticks(), event_time, timer_get_ticks() - event_time, time_per_column());
 	if ((timer_get_ticks() - event_time) >= time_per_column()) { // NOT GOING INTO THIS CONTINUOUSLY??
-	//printf("%d\n", time_since_event / 1000);
-	//printf("%d\n" , col_start_in_segment[cur_magnet-1]);
-	//printf("column offset: %d\n", time_since_event/time_per_column());
-	    printf("changing column");
+	    printf("changing column\n");
         column = (column + 1) % HORIZONTAL_RESOLUTION;
 	}
 	return column;
@@ -212,11 +206,11 @@ void main(void) {
 	    //int magnet = hall_read_event();
 		//printf("%d", magnet);
 	    unsigned int fcolumn = find_column();
-		//if (fcolumn != prev_column) {
+		if (fcolumn != prev_column) {
 	        printf("%d\n", fcolumn);
 		    prev_column = fcolumn;
 			//uart_putchar('-');
-		//}
+		}
 	}
 }
 //
