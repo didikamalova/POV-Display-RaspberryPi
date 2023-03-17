@@ -106,10 +106,11 @@ void find_avg_intervals(void) {
 		avg_intervals[i] = (measured_intervals[i] + measured_intervals[NUM_MAGNETS] + 
 								measured_intervals[NUM_MAGNETS*2])/3;
 	}
-    for (int i = 0; i < 2; i++) {
-		RTT_time += measured_RTT[i+1] - measured_RTT[i];
+    for (int i = 0; i < NUM_MAGNETS; i++) {
+		//RTT_time += measured_RTT[i+1] - measured_RTT[i];
+		RTT_time += avg_intervals[i];
 	}
-	RTT_time /= 3;
+	//RTT_time /= 3;
 }
 
 const unsigned int time_per_column(void) {
