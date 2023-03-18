@@ -45,22 +45,11 @@ static unsigned int lastmagnetevent = 0;
 volatile int which_magnet;
 
 rb_t *rb;
-// Given function from Pat's hall.c code
-//void print_magnet(unsigned int vout)
-//{
-//    printf(vout ?  "magnet out of range\n" : "magnet detected\n" );
-//}
-
-//int get_which_magnet(void);
 
 void hall_init(void) {
-	//rb_t *rb = rb_new();
 	rb = rb_new();
 	which_magnet = 0;
 
-
-//    gpio_init();
-//    uart_init();
 	printf("initialize interrupts completed\n");
 	gpio_set_input(hall_pin);
   	gpio_set_function(hall_pin, GPIO_FUNC_INPUT);
@@ -72,8 +61,6 @@ void hall_init(void) {
 	gpio_interrupts_register_handler(hall_pin, handle_hall, rb);
 	gpio_interrupts_enable();
 	interrupts_global_enable();
-
-
 }
 
 void handle_hall(unsigned int pc, void *aux_data) {
@@ -90,7 +77,6 @@ void handle_hall(unsigned int pc, void *aux_data) {
 			rb_enqueue(rb, magnetnum);
 			which_magnet = magnetnum;
 		}
-
 	}
 }
 
@@ -101,32 +87,11 @@ volatile int get_which_magnet(void) {
 }
 
 int hall_read_event(void) {
-//	while (1) {
-		while(rb_empty(rb)) {/* spin */};
-		rb_dequeue(rb, &which_magnet);
+	while(rb_empty(rb)) {/* spin */};
+	rb_dequeue(rb, &which_magnet);
 //		printf("%d\n", which_magnet);
-		uart_putchar('+');
-		lastmagnetevent = 0;
+	uart_putchar('+');
+	lastmagnetevent = 0;
         //printf("get which magnet: %d\n", which_magnet);
-		return which_magnet;
-//	}
-
-	// PAT'S ORIGINAL CODE
-    // vout is 1 when the magnet is out of range of the sensor
-//    print_magnet(1);
-//	while(1) {
-//  	while(gpio_read(hall_pin) == 1) {} // wait for low
-//		print_magnet(0);
-// 		while(gpio_read(hall_pin) == 0) {} // wait for high
-//		print_magnet(1);		
-//		}
+	return which_magnet;
 }
-
-
-//void main(void) {
-//    hall_init();
-//	while (1) {
-//	     printf("%d\n", hall_read_event());
-//	}
-//}
-
