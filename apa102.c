@@ -36,11 +36,14 @@ void apa102_show(void)
     unsigned char end[(NUM_LEDS+15)/16] = { 0 };
 
     spi_txrx(start, rx, 4);
+
     for (int i = 0; i < NUM_LEDS; i++) {
+
         for (int k = 24; k >= 0; k-=8) {
             component = strip_data[i] >> k & 0x0FF;
             spi_txrx(&component, rx, 1);
         }
+        
     }
     spi_txrx(end, rx, (NUM_LEDS+15)/16);
 }

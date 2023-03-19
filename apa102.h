@@ -14,29 +14,17 @@
 /*
  * `color_t`
  *
- * BGRA colors, where each color component B, G, R, or A is a single 
- * unsigned byte. The least signficant byte is the B component, and A 
- * is most significant.
+ * ABGR colors, where each color component B, G, R, or A is a single 
+ * unsigned byte. The least signficant byte is the R component, and A 
+ * is most significant. In this setting, the brightness maximum (31).
  */
 typedef unsigned int color_t;
 
 /* Common Colors */
-#define BLACK    0xFF000000
 #define WHITE    0xFFFFFFFF
-#define RED      0xFFFF0000
+#define RED      0xFF0000FF
 #define GREEN    0xFF00FF00
-#define BLUE     0xFF0000FF
-#define CYAN     0xFF00FFFF
-#define MAGENTA  0xFFFF00FF
-#define YELLOW   0xFFFFFF00
-#define AMBER    0xFFFFBF00
-#define ORANGE   0xFFFF3F00
-#define PURPLE   0xFF7F00FF
-#define INDIGO   0xFF000040
-#define CAYENNE  0xFF400000
-#define MOSS     0xFF004000
-#define SILVER   0xFFBBBBBB
-
+#define BLUE     0xFFFF0000
 
 /*
  * `apa102_init`
