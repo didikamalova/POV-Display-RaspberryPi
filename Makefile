@@ -1,4 +1,4 @@
-NAME = test_led
+NAME = test_apa102
 
 MODULES = spi.o apa102.o
 CFLAGS = -g -Wall -Og -std=c99 -ffreestanding -I$(CS107E)/include
