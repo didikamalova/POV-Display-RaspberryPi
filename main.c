@@ -38,13 +38,13 @@ void main(void)
 	while(1) {
 		hall_read_event();
 		if (count == 0) {
-			apa102_clear(255,255,0,0);
+			apa102_clear(RED);
 			count++;
 		} else if (count == 1) {
-			apa102_clear(255, 0, 0, 255);
+			apa102_clear(BLUE);
 			count++;
 		} else {
-			apa102_clear(255, 0, 255, 0);
+			apa102_clear(GREEN);
 			count = 0;
 		}
 		apa102_show();
