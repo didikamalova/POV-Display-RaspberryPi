@@ -2,24 +2,27 @@
 #include "spi.h"
 #include "uart.h"
 #include "timer.h"
-#include "hall.h"
-#include "gpio.h"
-#include "printf.h"
-#include "RTTmeasure.h"
-#include "interrupts.h"
 
 void main(void)
 {
-	gpio_init();
-	uart_init();
-	hall_init();
-  	apa102_init();
+    uart_init();
+    //hall_init();
+    apa102_init();
 
-//	int something = hall_read_event();
-//    apa102_clear(255, 255, 0, 0);
-//	printf("LED strip driven blue.\n");
-  //  apa102_show();
+    for (int i = 0; i < 20; i++) {
+        apa102_clear(BLUE);
+        apa102_show();
+        timer_delay_ms(300);
+        apa102_clear(RED);
+        apa102_show();
+        timer_delay_ms(300);
+        apa102_clear(GREEN);
+        apa102_show();
+        timer_delay_ms(300);
+    }
 
+<<<<<<< HEAD
+=======
 //	int another = hall_read_event();
 //	apa102_clear(0,255,0,0);
 //	printf("LED strip off.\n");
@@ -52,6 +55,6 @@ void main(void)
 //		}
 //		apa102_show();
 //	}
+>>>>>>> fcf43eeb8a29817f738d30371996effe4dbf8afd
     uart_putchar(EOT);
-
 }
