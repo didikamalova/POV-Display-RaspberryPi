@@ -29,7 +29,6 @@ void get_imm_event_time(void);
 // new event time function
 unsigned int find_column(void);
 
-
 #endif
 
 
