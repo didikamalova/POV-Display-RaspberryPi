@@ -1,9 +1,6 @@
 NAME = main
 
-<<<<<<< HEAD
 MODULES = spi.o apa102.o hall.o 
-=======
->>>>>>> fcf43eeb8a29817f738d30371996effe4dbf8afd
 CFLAGS = -g -Wall -Og -std=c99 -ffreestanding -I$(CS107E)/include
 LDFLAGS = -nostdlib -T memmap -L$(CS107E)/lib
 LDLIBS = -lpi -lgcc

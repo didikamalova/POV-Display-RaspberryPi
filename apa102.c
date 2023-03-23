@@ -27,11 +27,15 @@ void apa102_init(void)
 void apa102_clear(color_t c)
 {
     for (int i = 0; i < NUM_LEDS; i++) strip_data[i] = c;
-
-    //for (int i = 0; i < NUM_LEDS; i++) printf("LED: %d, %x\n", i, strip_data[i]);
 }
 
 void apa102_set_led(int n, color_t c)
+{
+    if (n < 0 || n >= NUM_LEDS) return;
+    strip_data[n] = c;
+}
+
+void apa102_set_led_params(int n, unsigned char brightness, unsigned char b, unsigned char g, unsigned char r)
 {
     if (n < 0 || n >= NUM_LEDS) return;
     strip_data[n] = c;

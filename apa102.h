@@ -3,8 +3,6 @@
 
 #include "apa102.h"
 
-<<<<<<< HEAD
-=======
 /* 
  * Number of frames the strip buffer will contain.
  * Can be smaller than than the number of LEDs 
@@ -12,7 +10,6 @@
  */
 
 #define NUM_LEDS 120
->>>>>>> fcf43eeb8a29817f738d30371996effe4dbf8afd
 
 /*
  * `color_t`
