@@ -26,7 +26,7 @@ static unsigned int measured_intervals[NUM_MAGNETS*3];
 static unsigned int avg_intervals[NUM_MAGNETS];
 static unsigned int measured_RTT[4];
 static unsigned int col_start_in_segment[NUM_MAGNETS];
-volatile unsigned int event_time;
+volatile unsigned int event_time = 0;
 volatile unsigned int prev_time = 0;
 unsigned int RTT_time = 0;
 volatile unsigned int column = 0;
@@ -62,6 +62,12 @@ void RTT_init(void) {
 // last event time
 void get_event_time_init(void) {
     cur_magnet = hall_read_event(); // must continuously read this somewhere in code
+	if (event_time == 0) {
+	    unsigned int time_start = timer_get_ticks();
+		while (timer_get_ticks - timer_get_ticks() >= 5*1000*1000) {
+	        cur_magnet = hall_read_event();
+	    }
+	}
     if (cur_magnet != prev_magnet) {
 		prev_magnet = cur_magnet;
 		event_time = timer_get_ticks();
