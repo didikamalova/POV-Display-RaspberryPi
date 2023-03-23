@@ -2,6 +2,7 @@
 #include "spi.h"
 #include "uart.h"
 #include "timer.h"
+#include "hall.h"
 
 void main(void)
 {

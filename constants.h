@@ -1,7 +1,7 @@
 // define all important constants
 
 
-#define VERTICAL_RESOLUTION 55 // no. of LEDs on each side
+#define VERTICAL_RESOLUTION 60 // no. of LEDs on each side
 #define HORIZONTAL_RESOLUTION 120 // calculate this by doing math - circumference/width of LED strip
 #define CHANNELS_PER_PIXEL 4 // RGBA
 

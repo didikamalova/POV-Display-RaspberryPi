@@ -1,4 +1,4 @@
-NAME = main
+NAME = globe
 
 MODULES = spi.o apa102.o hall.o 
 CFLAGS = -g -Wall -Og -std=c99 -ffreestanding -I$(CS107E)/include
