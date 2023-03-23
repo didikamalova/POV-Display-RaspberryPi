@@ -50,7 +50,7 @@ void hall_init(void) {
 	rb = rb_new();
 	which_magnet = 0;
 
-	printf("initialize interrupts completed\n");
+	//printf("initialize interrupts completed\n");
 	gpio_set_input(hall_pin);
   	gpio_set_function(hall_pin, GPIO_FUNC_INPUT);
   	gpio_set_pullup(hall_pin);
@@ -90,7 +90,7 @@ int hall_read_event(void) {
 	while(rb_empty(rb)) {/* spin */};
 	rb_dequeue(rb, &which_magnet);
 //		printf("%d\n", which_magnet);
-	uart_putchar('+');
+	//uart_putchar('+');
 	lastmagnetevent = 0;
         //printf("get which magnet: %d\n", which_magnet);
 	return which_magnet;

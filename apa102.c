@@ -1,6 +1,7 @@
 #include "apa102.h"
 #include "spi.h"
 #include "printf.h"
+#include "malloc.h"
 
 /* SPI Parameters */
 #define POL       0
@@ -15,7 +16,7 @@
 
 #define NUM_LEDS 60
 
-static color_t strip_data[NUM_LEDS] = { 0 };
+static color_t strip_data[NUM_LEDS];
 
 void apa102_init(void)
 {
@@ -50,7 +51,7 @@ void apa102_show(void)
     spi_txrx(start, rx, 4);
     //printf("\n");
     for (int i = 0; i < NUM_LEDS; i++) {
-        //printf("LED: %d, %x\n", i, strip_data[i]);
+        //printf("%d, %x\n", i, strip_data[i]);
         for (int k = 24; k >= 0; k-=8) {
             component = strip_data[i] >> k & 0x0FF;
             spi_txrx(&component, rx, 1);
