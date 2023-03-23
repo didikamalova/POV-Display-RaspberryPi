@@ -9,7 +9,7 @@
  * physically available on the strip, but not larger.
  */
 
-#define NUM_LEDS 72
+#define NUM_LEDS 120
 
 /*
  * `color_t`
