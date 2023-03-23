@@ -34,21 +34,24 @@ void main(void)
 //	apa102_clear(255, 0, 0, 255);
 //	apa102_show();
 
-	int count = 0;
-	while(1) {
-		hall_read_event();
-		if (count == 0) {
-			apa102_clear(RED);
-			count++;
-		} else if (count == 1) {
-			apa102_clear(BLUE);
-			count++;
-		} else {
-			apa102_clear(GREEN);
-			count = 0;
-		}
-		apa102_show();
-	}
+	apa102_clear(RED);
+	apa102_show();
+
+//	int count = 0;
+//	while(1) {
+//		hall_read_event();
+//		if (count == 0) {
+//			apa102_clear(RED);
+//			count++;
+//		} else if (count == 1) {
+//			apa102_clear(BLUE);
+//			count++;
+//		} else {
+//			apa102_clear(GREEN);
+//			count = 0;
+//		}
+//		apa102_show();
+//	}
     uart_putchar(EOT);
 
 }
