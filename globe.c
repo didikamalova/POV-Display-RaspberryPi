@@ -1,6 +1,11 @@
 # include "apa102.h"
 # include "RTTmeasure.h"
 # include "timer.h"
+# include "uart.h"
+# include "gpio.h"
+# include "constants.h"
+# include "printf.h"
+
 // doing graphics for globe
 // consider converting an image to a bitmap and using that
 
@@ -512,31 +517,44 @@ void main(void) {
     // rbga - in globe array
 	// abgr
 	// 60 across, 120 down
+	
+	gpio_init();
+	uart_init();
+
+	// init apa-testing only
+	apa102_init();
+		
 
 	apa102_clear(RED);
 	apa102_show();
-	RTT_init();
+//	RTT_init();
+	timer_delay(3);
 
 	apa102_clear(GREEN);
 	apa102_show();
 	timer_delay(3);
 
 	unsigned int prev_column = -1;
+	unsigned int column = 0;
 	while (1) {
-	    unsigned int column = find_column();
-		unsigned int opp_column = find_opposite_column();
+//	    unsigned int column = find_column();
+//		unsigned int opp_column = find_opposite_column();
 		if (column != prev_column) {
+//			printf("Made it!\n");
 		    prev_column = column;
-            for (int i = VERTICAL_RESOLUTION*4 - 1; i >= 0; i++) {
+            for (int i = VERTICAL_RESOLUTION*4 - 1; i >= 0; i = i-4) {
+//				printf("in the loop: %d\n", i);
 			    unsigned int col_index = i + (column*HORIZONTAL_RESOLUTION);
 				color_t c = apa102_color(earth_jpg[col_index], earth_jpg[col_index+1], earth_jpg[col_index+2], earth_jpg[col_index+3]);
 			    apa102_set_led(i, c);
 		    }
-            for (int i = 0; i < VERTICAL_RESOLUTION*4; i++) {
-			    unsigned int opp_col_index = i + (opp_column*HORIZONTAL_RESOLUTION);
-				color_t c = apa102_color(earth_jpg[opp_col_index+3], earth_jpg[opp_col_index+2], earth_jpg[opp_col_index+1], earth_jpg[opp_col_index]);
-			    apa102_set_led(i, c);
-		    }
+//            for (int i = 0; i < VERTICAL_RESOLUTION*4; i++) {
+//			    unsigned int opp_col_index = i + (opp_column*HORIZONTAL_RESOLUTION);
+//				color_t c = apa102_color(earth_jpg[opp_col_index+3], earth_jpg[opp_col_index+2], earth_jpg[opp_col_index+1], earth_jpg[opp_col_index]);
+//			    apa102_set_led(i, c);
+//		    }
+			column = (column + 1) % HORIZONTAL_RESOLUTION;
+			timer_delay(1);
 	        apa102_show();
 	    }
 	}

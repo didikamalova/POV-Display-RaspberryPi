@@ -40,9 +40,6 @@ void find_start_col_segment(void);
 // we need RTT init for initializing hall sensor and then calculating these averages
 void RTT_init(void) {
     //temp inits for testing
-	gpio_init();
-	apa102_init();
-	uart_init();
 	
 	hall_init(); // hall code now initialized
 	timer_init();
