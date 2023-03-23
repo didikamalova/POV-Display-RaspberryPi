@@ -1,5 +1,6 @@
 # include "apa102.h"
 # include "RTTmeasure.h"
+# include "timer.h"
 // doing graphics for globe
 // consider converting an image to a bitmap and using that
 
@@ -512,7 +513,14 @@ void main(void) {
 	// abgr
 	// 60 across, 120 down
 
-    RTT_init();
+	apa102_clear(RED);
+	apa102_show();
+	RTT_init();
+
+	apa102_clear(GREEN);
+	apa102_show();
+	timer_delay(3);
+
 	unsigned int prev_column = -1;
 	while (1) {
 	    unsigned int column = find_column();
@@ -526,7 +534,7 @@ void main(void) {
 		    }
             for (int i = 0; i < VERTICAL_RESOLUTION*4; i++) {
 			    unsigned int opp_col_index = i + (opp_column*HORIZONTAL_RESOLUTION);
-				c = apa102_color(earth_jpg[opp_col_index+3], earth_jpg[opp_col_index+2], earth_jpg[opp_col_index+1], earth_jpg[opp_col_index]);
+				color_t c = apa102_color(earth_jpg[opp_col_index+3], earth_jpg[opp_col_index+2], earth_jpg[opp_col_index+1], earth_jpg[opp_col_index]);
 			    apa102_set_led(i, c);
 		    }
 	        apa102_show();
