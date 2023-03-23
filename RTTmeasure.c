@@ -64,7 +64,7 @@ void get_event_time_init(void) {
     cur_magnet = hall_read_event(); // must continuously read this somewhere in code
 	if (event_time == 0) {
 	    unsigned int time_start = timer_get_ticks();
-		while (timer_get_ticks - timer_get_ticks() >= 5*1000*1000) {
+		while (timer_get_ticks() - time_start >= 5*1000*1000) {
 	        cur_magnet = hall_read_event();
 	    }
 	}
