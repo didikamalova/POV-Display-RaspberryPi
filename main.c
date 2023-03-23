@@ -2,6 +2,7 @@
 #include "spi.h"
 #include "uart.h"
 #include "timer.h"
+#include "hall.h"
 
 void main(void)
 {
@@ -21,8 +22,6 @@ void main(void)
         timer_delay_ms(300);
     }
 
-<<<<<<< HEAD
-=======
 //	int another = hall_read_event();
 //	apa102_clear(0,255,0,0);
 //	printf("LED strip off.\n");
@@ -55,6 +54,5 @@ void main(void)
 //		}
 //		apa102_show();
 //	}
->>>>>>> fcf43eeb8a29817f738d30371996effe4dbf8afd
     uart_putchar(EOT);
 }

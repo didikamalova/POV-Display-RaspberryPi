@@ -29,6 +29,11 @@ void get_imm_event_time(void);
 // new event time function
 unsigned int find_column(void);
 
+// new event time function
+unsigned int find_opposite_column(void);
+
+
+
 #endif
 
 
