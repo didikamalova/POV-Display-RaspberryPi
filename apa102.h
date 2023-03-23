@@ -3,13 +3,6 @@
 
 #include "apa102.h"
 
-/* 
- * Number of frames the strip buffer will contain.
- * Can be smaller than than the number of LEDs 
- * physically available on the strip, but not larger.
- */
-
-#define NUM_LEDS 72
 
 /*
  * `color_t`
@@ -39,8 +32,6 @@ void apa102_init(void);
  * Clears all the LEDs in the buffer to the given color.
  *
  * @param c color
- * 
- * If color parameters are invalid, does nothing.
  */
 void apa102_clear(color_t c);
 
@@ -51,8 +42,7 @@ void apa102_clear(color_t c);
  *
  * @param c color
  * 
- * If n is outside the bounds of the strip or color 
- * parameters are invalid, does nothing.
+ * If n is outside the bounds of the strip, does nothing.
  */
 void apa102_set_led(int n, color_t c);
 
@@ -62,16 +52,5 @@ void apa102_set_led(int n, color_t c);
  * Displays the contents of the buffer on the strip.
  */
 void apa102_show(void);
-
-/*
- * `apa102_get_led`
- *
- * Returns the color of a single LED on the strip.
- *
- * @param n  number of the LED (between 0 and NUM_LEDS-1)
- *
- * If n is outside the bounds of the strip, does nothing.
- */
-void apa102_get_led(int n);
 
 #endif

@@ -27,8 +27,19 @@ void main(void)
     apa102_init();
     printf("LED strip initialized!\n");
 
-    apa102_clear(GREEN);
-    test_set_led();
+    for (int i = 0; i < 5; i++) {
+        apa102_clear(BLUE);
+        apa102_show();
+        timer_delay_ms(300);
+        apa102_clear(RED);
+        apa102_show();
+        timer_delay_ms(300);
+        apa102_clear(GREEN);
+        apa102_show();
+        timer_delay_ms(300);
+        apa102_clear(BLUE);
+        apa102_show();
+    }
 
     uart_putchar(EOT);
 }
