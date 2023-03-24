@@ -60,4 +60,6 @@ void apa102_set_led(int n, color_t c);
  */
 void apa102_show(void);
 
+color_t apa102_color(unsigned int a, unsigned char b, unsigned char g, unsigned char r);
+
 #endif
