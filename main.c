@@ -21,6 +21,8 @@ void main(void)
         apa102_show();
         timer_delay_ms(300);
     }
+	
+	// commented out code for hall-sensor driving testing
 
 //	int another = hall_read_event();
 //	apa102_clear(0,255,0,0);
