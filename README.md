@@ -1,5 +1,4 @@
-<h1> Project Title </h1>
-Persistence of Vision (POV) Display
+<h1> :earth_asia: Persistence of Vision (POV) Display :earth_asia: </h1>
 
 <h1> Team Members </h1>
 - Didi Kamalova <br>
