@@ -9,9 +9,9 @@
 We created a spherical persistence of vision (POV) LED Display that works by spinning a circular array of LEDs and relies on our eyes' natural “refresh rates” to create the illusion of a solid image on a sphere. Equipped with an LED strip, a hall sensor, 3 battery packs and framed with a desk fan, it creates patterns upon reacting to magnets spaced out across the circular base of the fan.
 
 <h1> Member Contribution </h1>
-- Aanya: graphics code, 3D modeling <br>
-- Didi: led driver code, soldering & cable management <br>
-- Naomi: hall sensor code, mechanical assembly <br>
+- Aanya: graphics code, 3D modeling, .... <br>
+- Didi: led driver code, soldering, cable management <br>
+- Naomi: hall sensor code, graphics code, .... <br>
 
 <h1> References </h1>
 - POV Globe Video and GitHub Repo: https://www.youtube.com/watch?v=E4yqSw38R_Q&t=178s <br>
