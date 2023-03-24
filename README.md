@@ -1,4 +1,3 @@
-# CS107e template
 ## Project title
 Persistence of Vision (POV) Display
 
