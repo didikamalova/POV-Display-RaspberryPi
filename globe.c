@@ -400,7 +400,7 @@ static const unsigned int checkerboard[]  = {
 color_t apa102_color(unsigned int a, unsigned char b, unsigned char g, unsigned char r)
 {
     // blue is the LSB
-//	printf("%x\n", a<<24 | b<<16 | g<<8 | r);
+//  printf("%x\n", a<<24 | b<<16 | g<<8 | r);
     return a<<24 | b<<16 | g<<8 | r;
 
 }
@@ -420,19 +420,26 @@ return res;
 void main(void) {
 // earth_jpg
     // rbga - in globe array
-	// abgr
-	// 60 across, 120 down
-	
-	//gpio_init();
-	uart_init();
+  // abgr
+  // 60 across, 120 down
+  
+  //gpio_init();
+  uart_init();
 
+<<<<<<< HEAD
 	// init apa-testing only
 	apa102_init(); // gpio initialized here
 //	RTT_init();
+=======
+  // init apa-testing only
+  apa102_init();
+//  RTT_init();
+>>>>>>> 7b669e0e46382990276648fb7bce53f99ad1a37d
 
-	unsigned int prev_column = -1;
-	unsigned int column = 0;
+  unsigned int prev_column = -1;
+  unsigned int column = 0;
 
+<<<<<<< HEAD
 //	for (int i = 0; i < 120; i++) {
 //		for (int j = 0; j < 60; j++) {
 //			unsigned int col_index = (120 * i) + j;
@@ -478,30 +485,62 @@ void main(void) {
 //		timer_delay(3);
     }
 	}
+=======
+//  for (int i = 0; i < 120; i++) {
+//    for (int j = 0; j < 60; j++) {
+//      unsigned int col_index = (120 * i) + j;
+//      color_t c = apa102_color(earth_jpg[col_index],earth_jpg[col_index+1],earth_jpg[col_index+2], earth_jpg[col_index+3]);
+//      apa102_set_led(j, c);
+//    }
+        apa102_clear(0xff0000ff);
+    apa102_show();
+    timer_delay(3);
+    // iterate through vertical resolution which is 60*4
+>>>>>>> 7b669e0e46382990276648fb7bce53f99ad1a37d
 
-//	while (1) {
-//	    unsigned int column = find_column();
-//		unsigned int opp_column = find_opposite_column();
-//		unsigned int count = 0;
-//		if (column != prev_column) {
-//		    prev_column = column;
+    // 120 across
+    // 60 down
+//   while(1) {
+//    for (int i = VERTICAL_RESOLUTION - 1; i >= 0; i--) {
+//        //unsigned int col_index = i + (column*HORIZONTAL_RESOLUTION);
+//      //color_t c = apa102_color(earth_jpg[col_index], earth_jpg[col_index+1], earth_jpg[col_index+2], earth_jpg[col_index+3]);
+//        color_t c = checkerboard[column + (i*HORIZONTAL_RESOLUTION)];
+//      //printf("%x\n", c);
+//        apa102_set_led(i, c);
+//      //printf("%x\n", invert(c));
+//      //count++;
+//      }
+//        column = (column + 1) % HORIZONTAL_RESOLUTION;
+//    apa102_show();
+//    //break;
+//    //printf("New column\n");
+//    timer_delay(3);
+//    }
+  }
+
+//  while (1) {
+//      unsigned int column = find_column();
+//    unsigned int opp_column = find_opposite_column();
+//    unsigned int count = 0;
+//    if (column != prev_column) {
+//        prev_column = column;
   //          for (int i = VERTICAL_RESOLUTION*4 - 1; i >= 0; i = i-4) {
-	//		    unsigned int col_index = i + (column*HORIZONTAL_RESOLUTION);
-	//			color_t c = apa102_color(earth_jpg[col_index], earth_jpg[col_index+1], earth_jpg[col_index+2], earth_jpg[col_index+3]);
-	//		    apa102_set_led(count, c);
-	//			count++;
-	//	    }
+  //        unsigned int col_index = i + (column*HORIZONTAL_RESOLUTION);
+  //      color_t c = apa102_color(earth_jpg[col_index], earth_jpg[col_index+1], earth_jpg[col_index+2], earth_jpg[col_index+3]);
+  //        apa102_set_led(count, c);
+  //      count++;
+  //      }
 
 //            for (int i = 0; i < VERTICAL_RESOLUTION*4; i++) {
-//			    unsigned int opp_col_index = i + (opp_column*HORIZONTAL_RESOLUTION);
-//				color_t c = apa102_color(earth_jpg[opp_col_index+3], earth_jpg[opp_col_index+2], earth_jpg[opp_col_index+1], earth_jpg[opp_col_index]);
-//			    apa102_set_led(i, c);
-//		    }
-			
-	//		column = (column + 1) % HORIZONTAL_RESOLUTION;
-	//		timer_delay(1);
-	  //      apa102_show();
-	    //}
-	//}
+//          unsigned int opp_col_index = i + (opp_column*HORIZONTAL_RESOLUTION);
+//        color_t c = apa102_color(earth_jpg[opp_col_index+3], earth_jpg[opp_col_index+2], earth_jpg[opp_col_index+1], earth_jpg[opp_col_index]);
+//          apa102_set_led(i, c);
+//        }
+      
+  //    column = (column + 1) % HORIZONTAL_RESOLUTION;
+  //    timer_delay(1);
+    //      apa102_show();
+      //}
+  //}
 
 //}
