@@ -1,4 +1,4 @@
-## Project Title
+<h1> Project Title
 Persistence of Vision (POV) Display
 
 ## Team Members
