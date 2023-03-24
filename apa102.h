@@ -60,6 +60,20 @@ void apa102_set_led(int n, color_t c);
  */
 void apa102_show(void);
 
-color_t apa102_color(unsigned int a, unsigned char b, unsigned char g, unsigned char r);
+
+/*
+ * `apa102_color`
+ *
+ * Returns a color composed of the specified red, green, and
+ * blue components. The alpha component of the color will be
+ * set to 0xff (full brightneess).
+ *
+ * @param r  the red component of the color
+ * @param g  the green component of the color
+ * @param b  the blue component of the color
+ *
+ * @return   the color as a single value of type color_t
+ */
+color_t apa102_color(unsigned char r, unsigned char g, unsigned char b);
 
 #endif

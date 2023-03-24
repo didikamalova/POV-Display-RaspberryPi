@@ -37,9 +37,8 @@ void apa102_set_led(int n, color_t c)
 
 color_t apa102_color(unsigned int a, unsigned char b, unsigned char g, unsigned char r)
 {
-    color_t color = a<<24 | b<<16 | g<<8 | r;
-    printf("%x\n", color);
-    return color;
+    color_t c = 0xFF << 24 | b << 16 | g << 8 | r;
+    return c;
 }
 
 void apa102_show(void)
@@ -49,18 +48,14 @@ void apa102_show(void)
     unsigned char component;
 
     unsigned char start[4] = { 0 };
-    //int end_len = (NUM_LEDS+15)/16;
     unsigned char end[4] = { 0 };
 
     spi_txrx(start, rx, 4);
-    //printf("\n");
     for (int i = 0; i < NUM_LEDS; i++) {
-        //printf("%d, %x\n", i, strip_data[i]);
         for (int k = 24; k >= 0; k-=8) {
             component = strip_data[i] >> k & 0x0FF;
             spi_txrx(&component, rx, 1);
         }
     }
-
     spi_txrx(end, rx, 4);
 }

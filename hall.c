@@ -1,26 +1,4 @@
 #include "constants.h"
-/*
- * hall effect sensor 3144.
- *
- * http://www.allegromicro.com/~/media/Files/Datasheets/A3141-2-3-4-Datasheet.ashx?la=en
- *
- *
- * looking down from the top of the pyramid = power, ground, output (vout).
- * 	- vout to gpio2.
- *	- enable pullup so don't need a resistor.
- *
- * http://www.raspberrypi-spy.co.uk/2015/09/how-to-use-a-hall-effect-sensor-with-the-raspberry-pi/
- *
- * The output of these devices (pin 3) switches low when the magnetic
- * field at the Hall element exceeds the operate point threshold (BOP). At
- * this point, the output voltage is VOUT(SAT). When the magnetic field
- * is reduced to below the release point threshold (BRP), the device
- * output goes high. The difference in the magnetic operate and release
- * points is called the hysteresis (Bhys) of the device. This built-in
- * hysteresis allows clean switching of the output even in the presence
- * of external mechanical vibration and electrical noise.
- */
-
 #include "gpio.h"
 #include "gpio_extra.h"
 #include "gpio_interrupts.h"
@@ -33,9 +11,8 @@
 
 void handle_hall(unsigned int pc, void *aux_data);
 
-// chang I/O pins as needed
+// change I/O pins as needed
 static const unsigned hall_pin = GPIO_PIN2;
-static const unsigned LED_pin = GPIO_PIN3;
 
 // Global variables for magnet event tracking
 static unsigned int totalmagnets = NUM_MAGNETS;
@@ -86,12 +63,15 @@ volatile int get_which_magnet(void) {
     return which_magnet;
 }
 
+// Read a hall event w/ debouncing implemented
 int hall_read_event(void) {
 	while(rb_empty(rb)) {/* spin */};
 	rb_dequeue(rb, &which_magnet);
-//		printf("%d\n", which_magnet);
+
+	// DEBUG STATEMENTS
+	//printf("%d\n", which_magnet);
 	//uart_putchar('+');
+	
 	lastmagnetevent = 0;
-        //printf("get which magnet: %d\n", which_magnet);
 	return which_magnet;
 }
