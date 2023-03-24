@@ -754,7 +754,9 @@ static const unsigned char reduced_earth[]  = {
 color_t apa102_color(unsigned int a, unsigned char b, unsigned char g, unsigned char r)
 {
     // blue is the LSB
+//	printf("%x\n", a<<24 | b<<16 | g<<8 | r);
     return a<<24 | b<<16 | g<<8 | r;
+
 }
 
 void main(void) {
@@ -768,40 +770,44 @@ void main(void) {
 
 	// init apa-testing only
 	apa102_init();
-		
-
-	apa102_clear(RED);
-	apa102_show();
 //	RTT_init();
-	timer_delay(3);
-
-	apa102_clear(GREEN);
-	apa102_show();
-	timer_delay(3);
 
 	unsigned int prev_column = -1;
 	unsigned int column = 0;
-	while (1) {
+
+	for (int i = 0; i < 120; i++) {
+		for (int j = 0; j < 60; j++) {
+			unsigned int col_index = (120 * i) + j;
+			color_t c = apa102_color(earth_jpg[col_index],earth_jpg[col_index+1],earth_jpg[col_index+2], earth_jpg[col_index+3]);
+			apa102_set_led(j, c);
+		}
+		apa102_show();
+		timer_delay(1);
+	}
+
+//	while (1) {
 //	    unsigned int column = find_column();
 //		unsigned int opp_column = find_opposite_column();
-		if (column != prev_column) {
-//			printf("Made it!\n");
-		    prev_column = column;
-            for (int i = VERTICAL_RESOLUTION*4 - 1; i >= 0; i = i-4) {
-//				printf("in the loop: %d\n", i);
-			    unsigned int col_index = i + (column*HORIZONTAL_RESOLUTION);
-				color_t c = apa102_color(earth_jpg[col_index], earth_jpg[col_index+1], earth_jpg[col_index+2], earth_jpg[col_index+3]);
-			    apa102_set_led(i, c);
-		    }
+//		unsigned int count = 0;
+//		if (column != prev_column) {
+//		    prev_column = column;
+  //          for (int i = VERTICAL_RESOLUTION*4 - 1; i >= 0; i = i-4) {
+	//		    unsigned int col_index = i + (column*HORIZONTAL_RESOLUTION);
+	//			color_t c = apa102_color(earth_jpg[col_index], earth_jpg[col_index+1], earth_jpg[col_index+2], earth_jpg[col_index+3]);
+	//		    apa102_set_led(count, c);
+	//			count++;
+	//	    }
+
 //            for (int i = 0; i < VERTICAL_RESOLUTION*4; i++) {
 //			    unsigned int opp_col_index = i + (opp_column*HORIZONTAL_RESOLUTION);
 //				color_t c = apa102_color(earth_jpg[opp_col_index+3], earth_jpg[opp_col_index+2], earth_jpg[opp_col_index+1], earth_jpg[opp_col_index]);
 //			    apa102_set_led(i, c);
 //		    }
-			column = (column + 1) % HORIZONTAL_RESOLUTION;
-			timer_delay(1);
-	        apa102_show();
-	    }
-	}
+			
+	//		column = (column + 1) % HORIZONTAL_RESOLUTION;
+	//		timer_delay(1);
+	  //      apa102_show();
+	    //}
+	//}
 
 }
