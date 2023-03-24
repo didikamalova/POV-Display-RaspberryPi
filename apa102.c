@@ -14,7 +14,7 @@
  * physically available on the strip, but not larger.
  */
 
-#define NUM_LEDS 60
+#define NUM_LEDS 120
 
 static color_t strip_data[NUM_LEDS];
 
@@ -27,8 +27,6 @@ void apa102_init(void)
 void apa102_clear(color_t c)
 {
     for (int i = 0; i < NUM_LEDS; i++) strip_data[i] = c;
-
-    //for (int i = 0; i < NUM_LEDS; i++) printf("LED: %d, %x\n", i, strip_data[i]);
 }
 
 void apa102_set_led(int n, color_t c)
@@ -37,6 +35,12 @@ void apa102_set_led(int n, color_t c)
     strip_data[n] = c;
 }
 
+color_t apa102_color(unsigned int a, unsigned char b, unsigned char g, unsigned char r)
+{
+    color_t color = a<<24 | b<<16 | g<<8 | r;
+    printf("%x\n", color);
+    return color;
+}
 
 void apa102_show(void)
 {
