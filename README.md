@@ -2,22 +2,22 @@
 Persistence of Vision (POV) Display
 
 <h1> Team Members </h1>
-- Didi Kamalova
-- Naomi Mo
-- Aanya Tashfeen
+- Didi Kamalova <br>
+- Naomi Mo <br>
+- Aanya Tashfeen <br>
 
 <h1> Project Description </h1>
 We created a spherical persistence of vision (POV) LED Display that works by spinning a circular array of LEDs and relies on our eyes' natural “refresh rates” to create the illusion of a solid image on a sphere. Equipped with an LED strip, a hall sensor, 3 battery packs and framed with a desk fan, it creates patterns upon reacting to magnets spaced out across the circular base of the fan.
 
 <h1> Member Contribution </h1>
-- Aanya: graphics code, 3D modeling
-- Didi: led driver code, soldering & cable management
-- Naomi: hall sensor code, mechanical assembly
+- Aanya: graphics code, 3D modeling <br>
+- Didi: led driver code, soldering & cable management <br>
+- Naomi: hall sensor code, mechanical assembly <br>
 
 <h1> References </h1>
-- POV Globe Video and GitHub Repo: https://www.youtube.com/watch?v=E4yqSw38R_Q&t=178s
-- Julie's LED strip driver code and Pat's hall effect sensor code
-- Math libraries from CS107E Repo
+- POV Globe Video and GitHub Repo: https://www.youtube.com/watch?v=E4yqSw38R_Q&t=178s <br>
+- Julie's LED strip driver code and Pat's hall effect sensor code <br>
+- Math libraries from CS107E Repo <br>
 
 <h1> Self-Evaluation </h1>
 We created a fully functioning prototype of a spherical LED Display that allows for free spinning, coded up an LED Strip driver, successfully integrated hall sensor interrupts and created a soccerball pattern on the sphere. While we have not been able to project a spherical image of the globe as initally planned, we were able to complete all other goals that we have set for this project. 
