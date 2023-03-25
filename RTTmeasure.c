@@ -14,6 +14,13 @@
  * Typically, frames per second is defined by the number of rotations of the motor per second (RPM/60).
  * This code computes columns 0 to HORIZONTAL_RESOLUTION for every frame while the motor is on, if find_column
  * called in an infinite while loop.
+ *
+ * Citation: Andreas Rottach, github username: rottaca
+ * Link: https://github.com/rottaca/PovGlobe/blob/master/pico_src/Renderer/RTTMeasure.hpp
+ * Our implementation of the RTT code was based on this approach. However, our code was written from scratch after
+ * looking over this code and was designed to interface with the way we had implemented hall sensor interrupts. Our
+ * magnets were also not equal distant apart, but his code assumes that they were, so our code was written to discard this
+ * assumption. This involved keeping track of a lot more variables and data.
  */
 #include "hall.h"
 #include "timer.h"
@@ -158,11 +165,8 @@ unsigned int find_opposite_column(void) {
 	return (column + (HORIZONTAL_RESOLUTION/2)) % HORIZONTAL_RESOLUTION;
 }
 
-
-// workflow to use this module:
-// RTT_init()
-// need to end up constantly reading columns not to miss one as the globe spins
-
+// Testing code
+// Had more printf statements in code to debug too
 //void main(void) {
   //  RTT_init();
 //	unsigned int prev_column = -1;
