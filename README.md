@@ -15,24 +15,23 @@ We created a spherical persistence of vision (POV) LED Display that works by spi
 
 <h1> References </h1>
 - POV Globe Video and GitHub Repo: https://www.youtube.com/watch?v=E4yqSw38R_Q&t=178s <br>
-- Julie's LED strip driver code and Pat's hall effect sensor code <br>
+- Julie's LED strip driver code <br>
+- Pat's hall effect sensor code <br>
 - Math libraries from CS107E Repo <br>
 
 <h1> Self-Evaluation </h1>
-We created a fully functioning prototype of a spherical LED Display that allows for free spinning, coded an LED strip driver, integrated hall sensor interrupts and successfully projected a soccerball pattern on the sphere. While we have not been able to project a spherical image of the globe as initally planned, we were able to complete all other goals that we have set for this project. <br>
-
+We created a fully functioning prototype of a spherical LED Display that allows for free spinning, coded an LED strip driver, integrated hall sensor interrupts and successfully projected a soccerball pattern on the sphere. While we have not been able to project a spherical image of the globe as was initally planned, we were able to complete all other goals that we have set for this project!
 
 One of the most memorable moments of this past week is definitely the moment when we stumbled upon an interesting bug: the motor on our fan was generating a magnetic field which would induce current interfering with our circuitry, displaying weird artifacts and an undefined behavior on the strip. In attempts to block/redirect the magnetic field, we created a shield made out of thin stainless steel plates layered onto one another. However, this ended up trapping the heat and ultimately overheated the motor, making it no longer functionable... at 12:30AM, the night before the demo. Thankfully, we were able to find a different fan (shoutout to Frances!) to reinstall our ring onto a new fan 15 minutes before the demo session.
 
 
-Aanya:
+Aanya: ... 
 
 
-Didi:
+Didi: Understanding how to drive an LED strip was not trivial; however, I felt comfortable navigating the datasheet for the APA10 communication protocols in the absense of reliable information! What helped me the most was using the logic analyzer to debug and experiment with data frames bit by bit (one of many useful skills learned in class!). I'm also happy with the electrical assembly of the display! I focused on placing our wires and circuit components in way that would look neat & help wires remain static during the rotation of the ring - mission accomplished!
 
 
-Naomi:
+Naomi: ...
 
 <h1> Photos </h1>
-Photos provided in the media folder!
-
+![POV Display](media/IMG_8513.jpg)
