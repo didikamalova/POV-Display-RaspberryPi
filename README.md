@@ -11,7 +11,7 @@ We created a spherical persistence of vision (POV) LED Display that works by spi
 <h1> Member Contribution </h1>
 - Aanya: graphics code, 3D modeling, .... <br>
 - Didi: led driver code, soldering, cable management <br>
-- Naomi: hall sensor code, graphics code, .... <br>
+- Naomi: hall sensor code, graphics code, hardware assembly and troubleshooting <br>
 
 <h1> References </h1>
 - POV Globe Video and GitHub Repo: https://www.youtube.com/watch?v=E4yqSw38R_Q&t=178s <br>
