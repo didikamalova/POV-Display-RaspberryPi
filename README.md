@@ -37,9 +37,9 @@ One of the most memorable moments of this past week is definitely the moment whe
   <img src="media/IMG_8513.jpg" title="LED Display" width = "500">
 </p>
 <p align="center">
-  <img src="media/IMG_1285.JPG" title="LED Display" width = "300">
-  <img src="media/IMG_8415.jpg" title="LED Display" width = "300">
-  <img src="media/IMG_8499.jpg" title="LED Display" width = "300">
+  <img src="media/IMG_1285.JPG" title="LED Display" width = "250">
+  <img src="media/IMG_8415.jpg" title="LED Display" width = "250">
+  <img src="media/IMG_8499.jpg" title="LED Display" width = "250">
 </p>
 
 
