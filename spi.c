@@ -1,3 +1,10 @@
+/*
+ * This code brought to you by the rag tag duo of Arjun and Eric! Visit us at
+ * our github accounts: https://github.com/arjunvb, https://github.com/efritz09
+ *
+ * Completed on: March 14, 2016
+ */
+
 #include "gpio.h"
 #include "gpio_extra.h"
 #include "spi.h"
