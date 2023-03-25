@@ -1,3 +1,7 @@
+/*
+ * Hall driver code base on Pat's implementation provided in the 107E library.
+ */
+
 #include "constants.h"
 #include "gpio.h"
 #include "gpio_extra.h"
