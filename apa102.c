@@ -1,7 +1,6 @@
 #include "apa102.h"
 #include "spi.h"
 #include "printf.h"
-#include "malloc.h"
 
 /* SPI Parameters */
 #define POL       0
@@ -35,9 +34,9 @@ void apa102_set_led(int n, color_t c)
     strip_data[n] = c;
 }
 
-color_t apa102_color(unsigned int a, unsigned char b, unsigned char g, unsigned char r)
+color_t apa102_color(unsigned char r, unsigned char g, unsigned char b)
 {
-    color_t c = 0xFF << 24 | b << 16 | g << 8 | r;
+    color_t c = (unsigned int)0xFF << 24 | b << 16 | g << 8 | r;
     return c;
 }
 
