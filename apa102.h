@@ -16,7 +16,7 @@
  *
  * ABGR colors, where each color component B, G, R, or A is a single 
  * unsigned byte. The least signficant byte is the R component, and A 
- * is most significant. In this setting, the brightness maximum (31).
+ * is most significant. A should always be set to 0xFF, i.e. max brightness.
  */
 typedef unsigned int color_t;
 
@@ -25,6 +25,21 @@ typedef unsigned int color_t;
 #define RED      0xFF0000FF
 #define GREEN    0xFF00FF00
 #define BLUE     0xFFFF0000
+
+/*
+ * `apa102_color`
+ *
+ * Returns a color composed of the specified red, green, and
+ * blue components. The alpha component of the color will be
+ * set to 0xff (full brightneess).
+ *
+ * @param r  the red component of the color
+ * @param g  the green component of the color
+ * @param b  the blue component of the color
+ *
+ * @return   the color as a single value of type color_t
+ */
+color_t apa102_color(unsigned char r, unsigned char g, unsigned char b);
 
 /*
  * `apa102_init`
@@ -60,20 +75,5 @@ void apa102_set_led(int n, color_t c);
  */
 void apa102_show(void);
 
-
-/*
- * `apa102_color`
- *
- * Returns a color composed of the specified red, green, and
- * blue components. The alpha component of the color will be
- * set to 0xff (full brightneess).
- *
- * @param r  the red component of the color
- * @param g  the green component of the color
- * @param b  the blue component of the color
- *
- * @return   the color as a single value of type color_t
- */
-color_t apa102_color(unsigned char r, unsigned char g, unsigned char b);
 
 #endif
