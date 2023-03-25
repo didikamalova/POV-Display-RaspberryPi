@@ -44,3 +44,6 @@ One of the most memorable moments of this past week is definitely the moment whe
 
 
 More images provided in the "media" folder!
+
+NOTE ABOUT CODE ORGANIZATION:
+The simple code that we ran during demo day is under main, but more intricate implementations involving round trip time and displaying image arrays (the globe, soccer ball, and checkerboard) are under globe.c and RTTmeasure.c. We unfortunately did not get these to be fully optimized and integrated by the end of the project deadline, although we made the soccer ball display operational after our demonstration.
