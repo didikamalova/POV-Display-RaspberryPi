@@ -14,7 +14,7 @@ We created a spherical persistence of vision (POV) LED Display that works by spi
 - Naomi: hall sensor code, graphics code, hardware assembly and troubleshooting <br>
 
 <h1> References </h1>
-- POV Globe <a href="https://www.youtube.com/watch?v=E4yqSw38R_Q&t=178s">Video</a> and <a href="https://github.com/rottaca/PovGlobe.git">GitHub Repository </a> <br>
+- POV Globe <a href="https://www.youtube.com/watch?v=E4yqSw38R_Q&t=178s](https://youtu.be/E4yqSw38R_Q">Video</a> and <a href="https://github.com/rottaca/PovGlobe.git">GitHub Repository</a> <br>
 - SPI module code by <a href="https://github.com/cs107e/cs107e.github.io/blob/25d6d0b08f8accd1bdcaf4e400c9574a3f2c0dcf/lectures/Sensors/code/arducam/spi.c">Arducam</a> <br>
 - Pat's hall effect sensor code <br>
 - Math libraries from CS107E Repo <br>
