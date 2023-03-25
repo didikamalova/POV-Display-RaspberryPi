@@ -31,7 +31,7 @@ One of the most memorable moments of this past week is definitely the moment we 
 **Didi**: Understanding how to drive an LED strip was not trivial; however, I felt comfortable navigating the datasheet for the APA102 communication protocol in the absense of reliable information! What helped me the most was using the logic analyzer to debug and experiment with data frames bit by bit (one of many useful skills learned in class!). I'm also happy with the electrical assembly of the display! I focused on placing our wires and circuit components in way that would look neat & help wires remain static during the rotation of the ring - mission accomplished!
 
 
-**Naomi**: ...
+**Naomi**: Implementing the hall sensor was relatively simple, as it only required three electrical connections, and I had Pat's hall sensor code to work with from the start! I built upon the existing code by adding interrupts so that sensor readings could be obtained while the Pi drove the LED strip; I also added debouncing so that magnet events would not be registered continuously in a magnetic field, and would instead only be registered by a change of state. After implementing the hall driver, I moved onto mechanical/electrical assembly; the initial stages of experimenting with the fan motor in Room 36 with Aanya were quite fun. It was also interesting to work through the logistics of operating the Pi independently of the computer (I have a newfound appreication for the bootloader).
 
 <p align="center">
   <img src="media/IMG_8513.jpg" title="LED Display" width = "500">
