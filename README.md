@@ -17,7 +17,6 @@ We created a spherical persistence of vision (POV) LED Display that works by spi
 - POV Globe <a href="https://www.youtube.com/watch?v=E4yqSw38R_Q&t=178s](https://youtu.be/E4yqSw38R_Q">Video</a> and <a href="https://github.com/rottaca/PovGlobe.git">GitHub Repository</a> <br>
 - SPI module code by <a href="https://github.com/cs107e/cs107e.github.io/blob/25d6d0b08f8accd1bdcaf4e400c9574a3f2c0dcf/lectures/Sensors/code/arducam/spi.c">Arducam</a> <br>
 - Pat's hall effect sensor code <br>
-- Math libraries from CS107E Repo <br>
 
 <h1> Self-Evaluation </h1>
 <p> We created a fully functioning prototype of a spherical LED Display that allows for free spinning, coded an LED strip driver, integrated hall sensor interrupts and successfully projected a soccerball pattern on the sphere. While we have not been able to project a spherical image of the globe as was initally planned, we were able to complete all other goals that we have set for this project! </p>
