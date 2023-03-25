@@ -6,6 +6,13 @@
  * measurement code to find the column number that the strip should be displaying and driving the LEDs in that way. The
  * RTT code works in a 10 second delay to allow the motor to reach an adequate speed before beginning to measure the 
  * average round trip time.
+ *
+ * Citation: Andreas Rottach, github username: rottaca
+ * https://github.com/rottaca/PovGlobe/blob/master/pico_src/Renderer/LEDController.cpp
+ * The implementation of the POV globe was loosely based on this implementation to get an idea for how to approach the problem.
+ * However, the code was written from scratch and based on our understanding of the code as the cited code was not commented, 
+ * implemented in a much more complicated way, and was difficult to interpret. The image arrays we used were also different from
+ * his, so we had to tailor the code to work with our RTT and hall sensor implementation and the image array.
  */
 # include "apa102.h"
 # include "RTTmeasure.h"
