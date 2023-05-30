@@ -23,15 +23,6 @@ We created a spherical persistence of vision (POV) LED Display that works by spi
 
 One of the most memorable moments of this past week is definitely the moment we stumbled upon an interesting bug: the motor on our fan was generating a magnetic field which would induce current interfering with our circuitry, displaying weird artifacts and an undefined behavior on the strip. In attempts to block/redirect the magnetic field, we created a shield made out of thin stainless steel plates layered onto one another. However, this ended up trapping the heat and ultimately overheated the motor, making it no longer functionable... at 12:30AM, the night before the demo. Thankfully, we were able to find a different fan (shoutout to Frances!) to reinstall our ring onto a new fan 15 minutes before the demo session.
 
-
-**Aanya**: ... 
-
-
-**Didi**: Understanding how to drive an LED strip was not trivial; however, I felt comfortable navigating the datasheet for the APA102 communication protocol in the absense of reliable information! What helped me the most was using the logic analyzer to debug and experiment with data frames bit by bit (one of many useful skills learned in class!). I'm also happy with the electrical assembly of the display! I focused on placing our wires and circuit components in way that would look neat & help wires remain static during the rotation of the ring - mission accomplished!
-
-
-**Naomi**: Implementing the hall sensor was relatively simple, as it only required three electrical connections, and I had Pat's hall sensor code to work with from the start (thank you Pat!). I built upon the existing code by adding interrupts so that sensor readings could be obtained while the Pi drove the LED strip; I also added debouncing so that magnet events would not be registered continuously in a magnetic field, and would instead only be registered by a change of state. After implementing the hall driver, I moved onto mechanical/electrical assembly; many nights these past few weeks were spent in Room 36 and Lab 64 working through hardware issues (the aforementioned magnetic field problems, power supply insufficiencies, fan stability, etc.). After all these issues, it was a relief to see the Pi spinning properly on demo day. It was also interesting to work through the logistics of powering and operating the Pi independently of the computer (I have developed a profound appreciation for the bootloader).
-
 <p align="center">
   <img src="media/IMG_8513.jpg" title="LED Display" width = "500">
 </p>
